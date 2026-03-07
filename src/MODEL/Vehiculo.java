@@ -26,10 +26,6 @@ public abstract class Vehiculo {
         this.ruta = ruta;
         this.disponible = disponible;
     }
-    
-    public boolean disponible(){
-        return disponible;
-    }
 
     public int getCapacidad() {
         return capacidad;
