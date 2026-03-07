@@ -9,4 +9,5 @@ package MODEL;
  * @author alvar
  */
 public interface imprimirDetalle {
+    void imprimirDetalle();
 }
