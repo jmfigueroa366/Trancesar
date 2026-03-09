@@ -57,7 +57,7 @@ public class VehiculoDAO {
         
     }
 
-    public Vehiculo buscarPorId(String placa){
+    public Vehiculo buscarPorPlaca(String placa){
 
         Vehiculo v = buscarEnArchivo(RutaArchivos.buses, "Bus", placa);
 
@@ -165,6 +165,19 @@ public class VehiculoDAO {
             
         } catch (Exception e) {
         }
+        
+    }
+    
+    public boolean exisPlaca(String placa){
+        
+        Vehiculo v =buscarPorPlaca(placa);
+        
+        if (v !=null) {
+            return true;
+        }else{
+            return false;
+        }
+        
         
     }
 }
