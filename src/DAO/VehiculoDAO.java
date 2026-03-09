@@ -168,6 +168,37 @@ public class VehiculoDAO {
         
     }
     
+    public void eliminar(String placa) {
+        
+        List<Vehiculo> lista = listarTodos();
+
+        eliminarDeArchivo(RutaArchivos.buses, placa, lista, "Bus");
+        eliminarDeArchivo(RutaArchivos.busetas, placa, lista, "Buseta");
+        eliminarDeArchivo(RutaArchivos.microBusetas, placa, lista, "MicroBus");
+        
+    }
+
+    private void eliminarDeArchivo(String ruta, String placa, List<Vehiculo> lista, String tipo) {
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, false))) {
+            for (Vehiculo v : lista) {
+
+                boolean esMismoTipo = (tipo.equals("Bus") && v instanceof Bus) ||
+                                      (tipo.equals("Buseta") && v instanceof Buseta) ||
+                                      (tipo.equals("MicroBus") && v instanceof MicroBus);
+
+                if (esMismoTipo && !v.getPlaca().equals(placa)) {
+                    bw.write(v.getPlaca() + ";" + v.getRuta() + ";" + v.getCapacidad() 
+                           + ";" + v.getTarifa() + ";" + v.isDisponible());
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al eliminar vehiculo: " + e.getMessage());
+        }
+        
+    }
+    
     public boolean exisPlaca(String placa){
         
         Vehiculo v =buscarPorPlaca(placa);
