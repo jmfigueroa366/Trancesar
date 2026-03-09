@@ -14,6 +14,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import trancesar.util.RutaArchivos;
 
 /**
@@ -95,7 +96,7 @@ public class VehiculoDAO {
                         return new Bus(capacidad, tarifa, placa, ruta, disponible);
                     }
                     
-                    if (tipo.equals("Micro Bus")) {
+                    if (tipo.equals("MicroBus")) {
                         return new MicroBus(capacidad, tarifa, placa, ruta, disponible);
                     }
                     
@@ -113,4 +114,57 @@ public class VehiculoDAO {
 
         return null;
         }
+    
+    public List<Vehiculo> listarTodos(){
+        
+        List<Vehiculo> lista =new ArrayList<>();
+        
+        listarDesdeArchivo(RutaArchivos.buses, "Bus", lista);
+        listarDesdeArchivo(RutaArchivos.busetas, "Busetas", lista);
+        listarDesdeArchivo(RutaArchivos.microBusetas, "MicroBus", lista);
+        
+        return lista;
+    }
+    
+    private void listarDesdeArchivo(String ruta,String tipo,List<Vehiculo> lista){
+        
+        try (BufferedReader leer=new BufferedReader(new FileReader(ruta))){
+            
+            String linea;
+            
+            while((linea=leer.readLine()) !=null){
+                if (linea.trim().isEmpty()) continue; 
+                
+                String datos[] = linea.split(";");
+                
+                String placa = datos[0];
+                String rutaVehiculo = datos[1];
+                int capacidad = Integer.parseInt(datos[2]);
+                float tarifa = Float.parseFloat(datos[3]);
+                boolean disponible = Boolean.parseBoolean(datos[4]);
+                
+                Vehiculo v = null;
+                
+                if (tipo.equals("Bus")) {
+                    v=new Bus(capacidad, tarifa, placa, ruta, disponible);
+                }
+                
+                if (tipo.equals("Buseta")) {
+                    v=new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                }
+ 
+                if (tipo.equals("McroBus")) {
+                    v=new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                }
+                
+                if (v!=null) {
+                    lista.add(v);
+                }
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        
+    }
 }
