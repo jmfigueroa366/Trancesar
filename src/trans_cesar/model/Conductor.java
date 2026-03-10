@@ -8,5 +8,34 @@ package trans_cesar.model;
  *
  * @author ANDREA CAROLINA
  */
-public class Conductor {
+public class Conductor extends Persona {
+    private int numeroLicencia;
+    private String categoria;
+
+    public Conductor(int numeroLicencia, String categoria) {
+        this.numeroLicencia = numeroLicencia;
+        this.categoria = categoria;
+    }
+
+    public Conductor(int numeroLicencia, String categoria, int id, String nombre, int edad) {
+        super(id, nombre, edad);
+        this.numeroLicencia = numeroLicencia;
+        this.categoria = categoria;
+    }
+
+    public int getNumeroLicencia() {
+        return numeroLicencia;
+    }
+
+    public void setNumeroLicencia(int numeroLicencia) {
+        this.numeroLicencia = numeroLicencia;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 }
