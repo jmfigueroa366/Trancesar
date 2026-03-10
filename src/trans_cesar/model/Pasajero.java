@@ -8,5 +8,24 @@ package trans_cesar.model;
  *
  * @author ANDREA CAROLINA
  */
-public class Pasajero {
+public class Pasajero extends Persona {
+    private String descuento;
+
+    public Pasajero(String descuento) {
+        this.descuento = descuento;
+    }
+
+    public Pasajero(String descuento, int id, String nombre, int edad) {
+        super(id, nombre, edad);
+        this.descuento = descuento;
+    }
+
+    public String getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(String descuento) {
+        this.descuento = descuento;
+    }
+
 }
