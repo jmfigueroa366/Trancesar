@@ -27,5 +27,4 @@ public class Pasajero extends Persona {
     public void setDescuento(String descuento) {
         this.descuento = descuento;
     }
-
 }
