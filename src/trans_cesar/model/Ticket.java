@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author ANDREA CAROLINA
  */
-public class Ticket {
+public class Ticket implements Imprimible, Calculable {
     private int NumeroTicket;
     private LocalDate fechaCompra;
     private String OrigenCiudad;
@@ -83,6 +83,16 @@ public class Ticket {
 
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+
+    @Override
+    public void imprimirDetalle() {
+         
+    }
+
+    @Override
+    public double calcularTotal() {
+         return PrecioFinal;
     }
     
 }
