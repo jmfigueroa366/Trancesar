@@ -8,7 +8,8 @@ package trans_cesar.model;
  *
  * @author ANDREA CAROLINA
  */
-public class Pasajero extends Persona {
+public abstract class Pasajero extends Persona {
+    private int tipo; //Esta variable define a que grupo pertenece, si estudiante, aldulto mayor o regular.
     private String descuento;
 
     public Pasajero(String descuento) {
@@ -27,4 +28,6 @@ public class Pasajero extends Persona {
     public void setDescuento(String descuento) {
         this.descuento = descuento;
     }
+    
+    public abstract double calcularDescuento(); 
 }
