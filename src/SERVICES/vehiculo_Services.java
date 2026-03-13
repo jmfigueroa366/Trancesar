@@ -31,6 +31,20 @@ public class vehiculo_Services {
         
     }
     
-    
+    public void validarTarifa(Vehiculo v)throws Exception{
+        
+        if (v instanceof Bus && v.getTarifa()<15000) {
+            System.out.println("El bus no puede tener mas de 45 pasajeros");
+        }
+        
+        if (v instanceof Buseta && v.getTarifa()<8000) {
+            System.out.println("La buseta no puede tener mas de 19 pasajeros");
+        }
+        
+        if (v instanceof MicroBus && v.getTarifa()<10000) {
+            System.out.println("El microBus no puede tener una capacidad mayor a 25 pasajeros");
+        }
+        
+    }
 
 }
