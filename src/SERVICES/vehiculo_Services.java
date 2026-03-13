@@ -15,9 +15,7 @@ import MODEL.MicroBus;
  */
 public class vehiculo_Services {
 
-    public void capacidad(int capacidad) {
-        
-        Vehiculo v = null;
+    public void validarCapacidad(Vehiculo v)throws Exception {
         
         if (v instanceof Bus && v.getCapacidad()>45) {
             System.out.println("El bus no puede tener mas de 45 pasajeros");
@@ -32,5 +30,7 @@ public class vehiculo_Services {
         }
         
     }
+    
+    
 
 }
