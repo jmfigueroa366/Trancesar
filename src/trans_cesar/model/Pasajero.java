@@ -14,11 +14,26 @@ public abstract class Pasajero extends Persona implements Imprimible {
 
     public Pasajero(String descuento) {
         this.descuento = descuento;
+        this.tipo = tipo;
     }
 
-    public Pasajero(String descuento, int id, String nombre, int edad) {
-        super(id, nombre, edad);
+    public Pasajero(int tipo, String descuento) {
+        this.tipo = tipo;
         this.descuento = descuento;
+    }
+
+    public Pasajero(int tipo, String descuento, int id, String nombre, int edad) {
+        super(id, nombre, edad);
+        this.tipo = tipo;
+        this.descuento = descuento;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
     public String getDescuento() {
@@ -28,6 +43,8 @@ public abstract class Pasajero extends Persona implements Imprimible {
     public void setDescuento(String descuento) {
         this.descuento = descuento;
     }
+
+    
     
     public abstract double calcularDescuento(); 
 
