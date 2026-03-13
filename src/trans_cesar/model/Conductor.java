@@ -8,7 +8,7 @@ package trans_cesar.model;
  *
  * @author ANDREA CAROLINA
  */
-public class Conductor extends Persona implements Imprimible {
+public class Conductor extends Persona {
     private int numeroLicencia;
     private String categoria;
 
@@ -37,10 +37,5 @@ public class Conductor extends Persona implements Imprimible {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
-    }
-
-    @Override
-    public void imprimirDetalle() {
-        
     }
 }

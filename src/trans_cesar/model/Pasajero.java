@@ -8,7 +8,7 @@ package trans_cesar.model;
  *
  * @author ANDREA CAROLINA
  */
-public abstract class Pasajero extends Persona implements Imprimible {
+public abstract class Pasajero extends Persona {
     private int tipo; //Esta variable define a que grupo pertenece, si estudiante, aldulto mayor o regular.
     private String descuento;
 
@@ -29,11 +29,5 @@ public abstract class Pasajero extends Persona implements Imprimible {
         this.descuento = descuento;
     }
     
-        @Override
-    public void imprimirDetalle() {
-       
-    }
-    
     public abstract double calcularDescuento(); 
-    
 }
