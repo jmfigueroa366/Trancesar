@@ -9,5 +9,11 @@ package SERVICES;
  * @author alvar
  */
 public class vehiculo_Services {
-    
+
+    public void capacidad(int capacidad) {
+        
+        
+        
+    }
+
 }
