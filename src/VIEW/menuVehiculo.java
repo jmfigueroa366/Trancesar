@@ -18,9 +18,9 @@ import java.io.InputStreamReader;
  *
  * @author alvar
  */
-public class Menu {
+public class menuVehiculo {
     
-    public Menu()throws IOException, Exception {
+    public menuVehiculo()throws IOException, Exception {
         
         BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
         
@@ -68,6 +68,7 @@ public class Menu {
                 System.out.println("║  3. MicroBus                       ║");
                 System.out.println("╚════════════════════════════════════╝");
                 System.out.print("   Seleccione el tipo: ");
+                
                 int tipo = Integer.parseInt(leer.readLine());
                 
                 System.out.println("╔════════════════════════════════════╗");
@@ -98,21 +99,21 @@ public class Menu {
                     case 1:
                         v = new Bus(capacidad, tarifa, placa, ruta, disponible);
                         
-                        vs.validarCapacidad(v);
+                        vs.validarRegistro(v);
                         
                         break;
                         
                     case 2:
                         v = new Buseta(capacidad, tarifa, placa, ruta, disponible);
                         
-                        vs.validarCapacidad(v);
+                        vs.validarRegistro(v);
                         
                         break;
                         
                     case 3:
                         v = new MicroBus(capacidad, tarifa, placa, ruta, disponible);
                         
-                        vs.validarCapacidad(v);
+                        vs.validarRegistro(v);
                         
                         break;
                         
@@ -120,9 +121,6 @@ public class Menu {
                         System.out.println("INGRESE UNA OPCION DEL MENU");
                 }
                 
-                //guardado en archivo
-                
-                vd.guardarVehiculo(v);
                 
                 break;
                 
@@ -176,9 +174,7 @@ public class Menu {
                 
             case 4:
                 
-                break;
                 
-            case 5:
                 
                 break;
                 

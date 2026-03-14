@@ -17,6 +17,25 @@ import MODEL.MicroBus;
 public class vehiculoServices {
    
     VehiculoDAO dao;
+    
+    public void validarRegistro(Vehiculo v)throws Exception{
+        
+        if (v.getPlaca().trim().isEmpty()) {
+            throw new Exception("Se necesota una placa para el vehiculo");
+        }
+        
+        if (v.getRuta().trim().isEmpty()) {
+            throw new Exception ("Se necesita la ruta para continuar");
+        }
+        
+        validarCapacidad(v);
+        
+        validarTarifa(v);
+        
+        if (dao.exisPlaca(v.getPlaca())) {
+            throw new Exception ("Esta placa ya existe");
+        }
+    }
 
     public void validarCapacidad(Vehiculo v)throws Exception {
         
