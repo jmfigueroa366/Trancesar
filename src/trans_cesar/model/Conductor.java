@@ -4,25 +4,22 @@
  */
 package trans_cesar.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author ANDREA CAROLINA
  */
-public class Conductor extends Persona implements Imprimible {
+public class Conductor extends Persona {
     private int numeroLicencia;
-    private String categoria;
+    private String categoriaLicencia;
 
-    public Conductor(int numeroLicencia, String categoria) {
+    public Conductor(int numeroLicencia, String categoriaLicencia, int id, String nombre, LocalDate fechaNacimiento) {
+        super(id, nombre, fechaNacimiento);
         this.numeroLicencia = numeroLicencia;
-        this.categoria = categoria;
+        this.categoriaLicencia = categoriaLicencia;
     }
-
-    public Conductor(int numeroLicencia, String categoria, int id, String nombre, int edad) {
-        super(id, nombre, edad);
-        this.numeroLicencia = numeroLicencia;
-        this.categoria = categoria;
-    }
-
+    
     public int getNumeroLicencia() {
         return numeroLicencia;
     }
@@ -31,12 +28,12 @@ public class Conductor extends Persona implements Imprimible {
         this.numeroLicencia = numeroLicencia;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategoriaLicencia() {
+        return categoriaLicencia;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoriaLicencia(String categoriaLicencia) {
+        this.categoriaLicencia = categoriaLicencia;
     }
 
     @Override
