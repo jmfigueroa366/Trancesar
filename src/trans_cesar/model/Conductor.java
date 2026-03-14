@@ -4,23 +4,20 @@
  */
 package trans_cesar.model;
 
+import java.time.LocalDate;
+import java.time.Period;
 /**
  *
  * @author ANDREA CAROLINA
  */
-public class Conductor extends Persona implements Imprimible {
+public class Conductor extends Persona {
     private int numeroLicencia;
-    private String categoria;
+    private String categoriaLicencia;
 
-    public Conductor(int numeroLicencia, String categoria) {
+    public Conductor(int numeroLicencia, String categoriaLicencia, int id, String nombre, LocalDate fechaNacimiento) {
+        super(id, nombre, fechaNacimiento);
         this.numeroLicencia = numeroLicencia;
-        this.categoria = categoria;
-    }
-
-    public Conductor(int numeroLicencia, String categoria, int id, String nombre, int edad) {
-        super(id, nombre, edad);
-        this.numeroLicencia = numeroLicencia;
-        this.categoria = categoria;
+        this.categoriaLicencia = categoriaLicencia;
     }
 
     public int getNumeroLicencia() {
@@ -31,16 +28,22 @@ public class Conductor extends Persona implements Imprimible {
         this.numeroLicencia = numeroLicencia;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategoriaLicencia() {
+        return categoriaLicencia;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoriaLicencia(String categoriaLicencia) {
+        this.categoriaLicencia = categoriaLicencia;
     }
 
     @Override
     public void imprimirDetalle() {
-        
+        int edad = Period.between(getFechaNacimiento(), LocalDate.now()).getYears();
+         System.out.println("CONDUCTOR");
+         System.out.println("Cedula: " + getId());
+         System.out.println("Nombre: " + getNombre());
+         System.out.println("Edad: " + edad + "años");
+         System.out.println("Número de Licencia: " + getNumeroLicencia());
+         System.out.println("Categoría de Licencia: " + getCategoriaLicencia());
     }
 }
