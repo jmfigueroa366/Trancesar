@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package VIEW;
-
-import DAO.VehiculoDAO;
 import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
@@ -21,7 +19,7 @@ import java.util.List;
  */
 public class menuVehiculo {
     
-    public menuVehiculo()throws IOException, Exception {
+    public static void main(String[] args) throws IOException, Exception {
         
         BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
         
@@ -34,15 +32,15 @@ public class menuVehiculo {
         vehiculoServices vs = null;
         Vehiculo v = null;    
             
-        System.out.println("╔════════════════════════════════════╗");
-        System.out.println("║       GESTIÓN DE VEHÍCULOS         ║");
-        System.out.println("╠════════════════════════════════════╣");
-        System.out.println("║  1. Registrar vehículo             ║");
-        System.out.println("║  2. Buscar vehículo                ║");
-        System.out.println("║  3. Eliminar vehículo              ║");
-        System.out.println("║  4. Listar vehículos               ║");
-        System.out.println("║  5. Salir                          ║");
-        System.out.println("╚════════════════════════════════════╝");
+        System.out.println("==============================");
+        System.out.println("|       GESTIÓN DE VEHÍCULOS         |");
+        System.out.println("==============================");
+        System.out.println("|  1. Registrar vehículo             |");
+        System.out.println("|  2. Buscar vehículo                |");
+        System.out.println("|  3. Eliminar vehículo              |");
+        System.out.println("|  4. Listar vehículos               |");
+        System.out.println("|  5. Salir                          |");
+        System.out.println("==============================");
         System.out.print("   Seleccione una opción: ");
         
             try {
@@ -59,38 +57,38 @@ public class menuVehiculo {
             
             case 1:
                 //ingreso de registros
-                System.out.println("╔════════════════════════════════════╗");
-                System.out.println("║       REGISTRAR VEHÍCULO           ║");
-                System.out.println("╠════════════════════════════════════╣");
-                System.out.println("║  Tipo de vehículo:                 ║");
-                System.out.println("║  1. Bus                            ║");
-                System.out.println("║  2. Buseta                         ║");
-                System.out.println("║  3. MicroBus                       ║");
-                System.out.println("╚════════════════════════════════════╝");
+                System.out.println("==============================");
+                System.out.println("1       REGISTRAR VEHÍCULO           |");
+                System.out.println("==============================");
+                System.out.println("|  Tipo de vehículo:                 |");
+                System.out.println("|  1. Bus                            |");
+                System.out.println("|  2. Buseta                         |");
+                System.out.println("|  3. MicroBus                       |");
+                System.out.println("===============================");
                 System.out.print("   Seleccione el tipo: ");
                 
                 int tipo = Integer.parseInt(leer.readLine());
                 
-                System.out.println("╔════════════════════════════════════╗");
-                System.out.println("║       DATOS DEL VEHÍCULO           ║");
-                System.out.println("╠════════════════════════════════════╣");
+                System.out.println("==============================");
+                System.out.println("|       DATOS DEL VEHÍCULO           |");
+                System.out.println("==============================");
 
-                System.out.print("║  Placa: ");
+                System.out.print("|  Placa: ");
                 String placa = leer.readLine();
 
-                System.out.print("║  Ruta: ");
+                System.out.print("|  Ruta: ");
                 String ruta = leer.readLine();
 
-                System.out.print("║  Capacidad: ");
+                System.out.print("|  Capacidad: ");
                 int capacidad = Integer.parseInt(leer.readLine());
 
-                System.out.print("║  Tarifa: ");
+                System.out.print("|  Tarifa: ");
                 float tarifa = Float.parseFloat(leer.readLine());
 
-                System.out.print("║  Disponible (true/false): ");
+                System.out.print("|  Disponible (true/false): ");
                 boolean disponible = Boolean.parseBoolean(leer.readLine());
 
-                System.out.println("╚════════════════════════════════════╝");
+                System.out.println("==============================");
                 
                 //identificacion de tipo de vehiculo para registrar
                 
@@ -126,26 +124,26 @@ public class menuVehiculo {
                 
             case 2:
                 
-                System.out.println("╔════════════════════════════════════╗");
-                System.out.println("║         BUSCAR VEHÍCULO            ║");
-                System.out.println("╠════════════════════════════════════╣");
-                System.out.print("║  Ingrese la placa: ");
+                System.out.println("==============================");
+                System.out.println("|         BUSCAR VEHÍCULO            |");
+                System.out.println("==============================");
+                System.out.print("|  Ingrese la placa: ");
                 p = leer.readLine();
-                System.out.println("╚════════════════════════════════════╝");
+                System.out.println("==============================");
                 
                 try {
                     
                     vs.validarBusqueda(p);
                     
-                        System.out.println("╔════════════════════════════════════╗");
-                        System.out.println("║       VEHÍCULO ENCONTRADO          ║");
-                        System.out.println("╠════════════════════════════════════╣");
-                        System.out.println("║  Placa:      " + v.getPlaca());
-                        System.out.println("║  Ruta:       " + v.getRuta());
-                        System.out.println("║  Capacidad:  " + v.getCapacidad());
-                        System.out.println("║  Tarifa:     " + v.getTarifa());
-                        System.out.println("║  Disponible: " + v.isDisponible());
-                        System.out.println("╚════════════════════════════════════╝");
+                        System.out.println("╔=============================");
+                        System.out.println("|       VEHÍCULO ENCONTRADO          |");
+                        System.out.println("==============================");
+                        System.out.println("|  Placa:      " + v.getPlaca());
+                        System.out.println("|  Ruta:       " + v.getRuta());
+                        System.out.println("|  Capacidad:  " + v.getCapacidad());
+                        System.out.println("|  Tarifa:     " + v.getTarifa());
+                        System.out.println("|  Disponible: " + v.isDisponible());
+                        System.out.println("==============================");
 
                     
                 } catch (Exception e) {
@@ -156,12 +154,12 @@ public class menuVehiculo {
                 
             case 3:
                 
-                        System.out.println("╔════════════════════════════════════╗");
-                        System.out.println("║        ELIMINAR VEHICULO            ║");
-                        System.out.println("╠════════════════════════════════════╣");
-                        System.out.print("║  Ingrese la placa: ");
+                        System.out.println("==============================");
+                        System.out.println("|        ELIMINAR VEHICULO            |");
+                        System.out.println("==============================");
+                        System.out.print("|  Ingrese la placa: ");
                         p = leer.readLine();
-                        System.out.println("╚════════════════════════════════════╝");
+                        System.out.println("==============================");
                         
                         try {
                            vs.eliminar(p);
@@ -178,20 +176,20 @@ public class menuVehiculo {
                     
                     List <Vehiculo> lista=vs.validarListado();
                     
-                    System.out.println("╔════════════════════════════════════╗");
-                    System.out.println("║         LISTA DE VEHÍCULOS         ║");
-                    System.out.println("╠════════════════════════════════════╣");
+                    System.out.println("==============================");
+                    System.out.println("|         LISTA DE VEHÍCULOS         |");
+                    System.out.println("==============================");
                     
                     for (Vehiculo ve : lista) {
-                        System.out.println("║  Placa:      " + ve.getPlaca());
-                        System.out.println("║  Ruta:       " + ve.getRuta());
-                        System.out.println("║  Capacidad:  " + ve.getCapacidad());
-                        System.out.println("║  Tarifa:     " + ve.getTarifa());
-                        System.out.println("║  Disponible: " + ve.isDisponible());
-                        System.out.println("╠════════════════════════════════════╣");
+                        System.out.println("|  Placa:      " + ve.getPlaca());
+                        System.out.println("|  Ruta:       " + ve.getRuta());
+                        System.out.println("|  Capacidad:  " + ve.getCapacidad());
+                        System.out.println("|  Tarifa:     " + ve.getTarifa());
+                        System.out.println("|  Disponible: " + ve.isDisponible());
+                        System.out.println("===========================");
                     }
-                    
-                    System.out.println("╚════════════════════════════════════╝");
+                                                                        //
+                    System.out.println("===============================");
                     
                 } catch (Exception e) {
                     System.out.println("Error de tipo " + e);
@@ -207,4 +205,5 @@ public class menuVehiculo {
         }
         
     }
-}
+  }
+
