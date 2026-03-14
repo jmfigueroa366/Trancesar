@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class vehiculoServices {
    
-    VehiculoDAO dao;
+    VehiculoDAO dao= new VehiculoDAO();
     
     public void validarRegistro(Vehiculo v)throws Exception{
         

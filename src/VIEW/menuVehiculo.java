@@ -29,7 +29,7 @@ public class menuVehiculo {
             
         String p=null;
         
-        vehiculoServices vs = null;
+        vehiculoServices vs = new vehiculoServices();
         Vehiculo v = null;    
             
         System.out.println("==============================");
@@ -38,7 +38,7 @@ public class menuVehiculo {
         System.out.println("|  1. Registrar vehículo             |");
         System.out.println("|  2. Buscar vehículo                |");
         System.out.println("|  3. Eliminar vehículo              |");
-        System.out.println("|  4. Listar vehículos               |");
+        System.out.println("|  4. Listar vehículos           |    |");
         System.out.println("|  5. Salir                          |");
         System.out.println("==============================");
         System.out.print("   Seleccione una opción: ");
@@ -79,9 +79,6 @@ public class menuVehiculo {
                 System.out.print("|  Ruta: ");
                 String ruta = leer.readLine();
 
-                System.out.print("|  Capacidad: ");
-                int capacidad = Integer.parseInt(leer.readLine());
-
                 System.out.print("|  Tarifa: ");
                 float tarifa = Float.parseFloat(leer.readLine());
 
@@ -95,21 +92,21 @@ public class menuVehiculo {
                 
                 switch (tipo) {
                     case 1:
-                        v = new Bus(capacidad, tarifa, placa, ruta, disponible);
+                        v = new Bus(45, tarifa, placa, ruta, disponible);
                         
                         vs.validarRegistro(v);
                         
                         break;
                         
                     case 2:
-                        v = new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                        v = new Buseta(19, tarifa, placa, ruta, disponible);
                         
                         vs.validarRegistro(v);
                         
                         break;
                         
                     case 3:
-                        v = new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                        v = new MicroBus(25, tarifa, placa, ruta, disponible);
                         
                         vs.validarRegistro(v);
                         
@@ -165,7 +162,7 @@ public class menuVehiculo {
                            vs.eliminar(p);
                             System.out.println("REGISTRO ELIMINADO");
                         } catch (Exception e) {
-                            System.out.println("ERROR DE TIPO " + e);
+                            System.out.println("NO EXISTE ESTE REGISTRO ");
                         }
                 
                 break;
