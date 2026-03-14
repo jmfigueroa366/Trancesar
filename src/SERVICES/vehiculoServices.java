@@ -56,7 +56,7 @@ public class vehiculoServices {
         throw new Exception("La placa no puede estar vacía");
         }
 
-        Vehiculo v = dao.buscarPorPlaca(placa); // ← aquí llama al DAO
+        Vehiculo v = dao.buscarPorPlaca(placa);
 
         if (v == null) {
             throw new Exception("No existe un vehiculo con la placa: " + placa);
@@ -65,4 +65,18 @@ public class vehiculoServices {
         return v;
         
     }
+    
+    public void eliminar(String placa) throws Exception {
+    
+        if (placa == null || placa.trim().isEmpty()) {
+            throw new Exception("La placa no puede estar vacía");
+        }
+
+        if (!dao.exisPlaca(placa)) {
+            throw new Exception("No existe un vehiculo con la placa: " + placa);
+        }
+
+        dao.eliminar(placa);
+    }
+    
 }

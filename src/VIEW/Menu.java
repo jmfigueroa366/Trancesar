@@ -20,18 +20,19 @@ import java.io.InputStreamReader;
  */
 public class Menu {
     
-    public Menu()throws IOException {
+    public Menu()throws IOException, Exception {
         
         BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
         
         int opc = 0;
         
+        while (opc !=5) {  
+            
+        String p=null;
+        
         VehiculoDAO vd = null;
         vehiculoServices vs = null;
-        Vehiculo v = null;
-        
-        
-        while (opc !=5) {            
+        Vehiculo v = null;    
             
         System.out.println("╔════════════════════════════════════╗");
         System.out.println("║       GESTIÓN DE VEHÍCULOS         ║");
@@ -96,15 +97,25 @@ public class Menu {
                 switch (tipo) {
                     case 1:
                         v = new Bus(capacidad, tarifa, placa, ruta, disponible);
+                        
+                        vs.validarCapacidad(v);
+                        
                         break;
                         
                     case 2:
                         v = new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                        
+                        vs.validarCapacidad(v);
+                        
                         break;
                         
                     case 3:
                         v = new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                        
+                        vs.validarCapacidad(v);
+                        
                         break;
+                        
                     default:
                         System.out.println("INGRESE UNA OPCION DEL MENU");
                 }
@@ -121,7 +132,7 @@ public class Menu {
                 System.out.println("║         BUSCAR VEHÍCULO            ║");
                 System.out.println("╠════════════════════════════════════╣");
                 System.out.print("║  Ingrese la placa: ");
-                String p = leer.readLine();
+                p = leer.readLine();
                 System.out.println("╚════════════════════════════════════╝");
                 
                 try {
@@ -146,6 +157,20 @@ public class Menu {
                 break;
                 
             case 3:
+                
+                        System.out.println("╔════════════════════════════════════╗");
+                        System.out.println("║        ELIMINAR VEHICULO            ║");
+                        System.out.println("╠════════════════════════════════════╣");
+                        System.out.print("║  Ingrese la placa: ");
+                        p = leer.readLine();
+                        System.out.println("╚════════════════════════════════════╝");
+                        
+                        try {
+                           vs.eliminar(p);
+                            System.out.println("REGISTRO ELIMINADO");
+                        } catch (Exception e) {
+                            System.out.println("ERROR DE TIPO " + e);
+                        }
                 
                 break;
                 
