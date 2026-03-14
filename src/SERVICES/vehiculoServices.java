@@ -13,9 +13,7 @@ import MODEL.MicroBus;
  *
  * @author alvar
  */
-public class vehiculo_Services {
-    
-    
+public class vehiculoServices {
 
     public void validarCapacidad(Vehiculo v)throws Exception {
         

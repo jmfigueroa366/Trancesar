@@ -4,6 +4,11 @@
  */
 package VIEW;
 
+import DAO.VehiculoDAO;
+import MODEL.Bus;
+import MODEL.Buseta;
+import MODEL.MicroBus;
+import MODEL.Vehiculo;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,6 +52,64 @@ public class Menu {
         switch (opc) {
             
             case 1:
+                //ingreso de registros
+                System.out.println("╔════════════════════════════════════╗");
+                System.out.println("║       REGISTRAR VEHÍCULO           ║");
+                System.out.println("╠════════════════════════════════════╣");
+                System.out.println("║  Tipo de vehículo:                 ║");
+                System.out.println("║  1. Bus                            ║");
+                System.out.println("║  2. Buseta                         ║");
+                System.out.println("║  3. MicroBus                       ║");
+                System.out.println("╚════════════════════════════════════╝");
+                System.out.print("   Seleccione el tipo: ");
+                int tipo = Integer.parseInt(leer.readLine());
+                
+                System.out.println("╔════════════════════════════════════╗");
+                System.out.println("║       DATOS DEL VEHÍCULO           ║");
+                System.out.println("╠════════════════════════════════════╣");
+
+                System.out.print("║  Placa: ");
+                String placa = leer.readLine();
+
+                System.out.print("║  Ruta: ");
+                String ruta = leer.readLine();
+
+                System.out.print("║  Capacidad: ");
+                int capacidad = Integer.parseInt(leer.readLine());
+
+                System.out.print("║  Tarifa: ");
+                float tarifa = Float.parseFloat(leer.readLine());
+
+                System.out.print("║  Disponible (true/false): ");
+                boolean disponible = Boolean.parseBoolean(leer.readLine());
+
+                System.out.println("╚════════════════════════════════════╝");
+                
+                //identificacion de tipo de vehiculo para registrar
+                
+                Vehiculo v = null;
+                
+                switch (tipo) {
+                    case 1:
+                        v = new Bus(capacidad, tarifa, placa, ruta, disponible);
+                        break;
+                        
+                    case 2:
+                        v = new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                        break;
+                        
+                    case 3:
+                        v = new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                        break;
+                    default:
+                        System.out.println("INGRESE UNA OPCION DEL MENU");
+                }
+                
+                //guardado en archivo
+                
+                VehiculoDAO vd = null;
+                
+                vd.guardarVehiculo(v);
                 
                 break;
                 
