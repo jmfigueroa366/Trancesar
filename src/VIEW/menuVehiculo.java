@@ -13,6 +13,7 @@ import SERVICES.vehiculoServices;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  *
@@ -30,7 +31,6 @@ public class menuVehiculo {
             
         String p=null;
         
-        VehiculoDAO vd = null;
         vehiculoServices vs = null;
         Vehiculo v = null;    
             
@@ -174,7 +174,28 @@ public class menuVehiculo {
                 
             case 4:
                 
-                
+                try {
+                    
+                    List <Vehiculo> lista=vs.validarListado();
+                    
+                    System.out.println("╔════════════════════════════════════╗");
+                    System.out.println("║         LISTA DE VEHÍCULOS         ║");
+                    System.out.println("╠════════════════════════════════════╣");
+                    
+                    for (Vehiculo ve : lista) {
+                        System.out.println("║  Placa:      " + ve.getPlaca());
+                        System.out.println("║  Ruta:       " + ve.getRuta());
+                        System.out.println("║  Capacidad:  " + ve.getCapacidad());
+                        System.out.println("║  Tarifa:     " + ve.getTarifa());
+                        System.out.println("║  Disponible: " + ve.isDisponible());
+                        System.out.println("╠════════════════════════════════════╣");
+                    }
+                    
+                    System.out.println("╚════════════════════════════════════╝");
+                    
+                } catch (Exception e) {
+                    System.out.println("Error de tipo " + e);
+                }
                 
                 break;
                 

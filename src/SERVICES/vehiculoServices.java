@@ -9,6 +9,7 @@ import MODEL.Vehiculo;
 import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
+import java.util.List;
 
 /**
  *
@@ -96,6 +97,18 @@ public class vehiculoServices {
         }
 
         dao.eliminar(placa);
+    }
+    
+    public List<Vehiculo> validarListado() throws Exception{
+        
+        List <Vehiculo> lista = dao.listarTodos();
+        
+        if (lista.isEmpty()) {
+            throw new Exception("La lista no tiene registros disponibles");
+        }
+        
+        return lista;
+        
     }
     
 }
