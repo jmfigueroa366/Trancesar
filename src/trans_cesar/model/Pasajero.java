@@ -4,52 +4,18 @@
  */
 package trans_cesar.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author ANDREA CAROLINA
  */
-public abstract class Pasajero extends Persona implements Imprimible {
-    private int tipo; //Esta variable define a que grupo pertenece, si estudiante, aldulto mayor o regular.
-    private String descuento;
+public abstract class Pasajero extends Persona {
 
-    public Pasajero(String descuento) {
-        this.descuento = descuento;
-        this.tipo = tipo;
+    public Pasajero(int id, String nombre, LocalDate fechaNacimiento) {
+        super(id, nombre, fechaNacimiento);
     }
-
-    public Pasajero(int tipo, String descuento) {
-        this.tipo = tipo;
-        this.descuento = descuento;
-    }
-
-    public Pasajero(int tipo, String descuento, int id, String nombre, int edad) {
-        super(id, nombre, edad);
-        this.tipo = tipo;
-        this.descuento = descuento;
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(String descuento) {
-        this.descuento = descuento;
-    }
-
-    
     
     public abstract double calcularDescuento(); 
 
-    @Override
-    public void imprimirDetalle() {
-        
-    }
 }
