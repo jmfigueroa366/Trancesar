@@ -10,10 +10,10 @@ import java.time.Period;
  *
  * @author ANDREA CAROLINA
  */
-public class PasajeroRegular extends Pasajero {
+public class PasajeroEstudiante extends Pasajero {
 
-    public PasajeroRegular(int id, String nombre, LocalDate fechaNacimiento, double Descuento) {
-        super(id, nombre, fechaNacimiento, 0.0);
+    public PasajeroEstudiante(int id, String nombre, LocalDate fechaNacimiento, double Descuento) {
+        super(id, nombre, fechaNacimiento, 0.15);
     }
     
     @Override
@@ -24,7 +24,7 @@ public class PasajeroRegular extends Pasajero {
     @Override
     public void imprimirDetalle() {
          int edad = Period.between(getFechaNacimiento(), LocalDate.now()).getYears();
-         System.out.println("PASAJERO REGULAR");
+         System.out.println("PASAJERO ESTUDIANTE");
          System.out.println("Cedula: " + getId());
          System.out.println("Nombre: " + getNombre());
          System.out.println("Edad: " + edad + "años");
