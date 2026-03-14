@@ -23,21 +23,38 @@ import java.io.IOException;
 public class PasajeroDAO {
     
     public void guardar(Pasajero pasajero) throws IOException {
-        try (BuffereWrite bw = new BufferedWriter ( 
+        try (BufferedWriter bw = new BufferedWriter ( 
                 new FileWriter (RutaArchivos.Pasajeros, true))) {
             bw.write(pasajero.getId() + ";" +
                      pasajero.getNombre() + ";" +
                      pasajero.getEdad() + ";" +
                      pasajero.getDescuento());
-}                    bw.newLine();
+                    bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar estudiante: " + e.getMessage());
         }
     }
     
+    
     public void BuscarId (String id) {
-        
+        try (BufferedReader br = new BufferedReader (
+                new FileReader (RutaArchivos.Pasajeros))) {
+                String linea; 
+                while ((linea = br.readLine()) !=null) {
+                    if (linea.trim().isEmpty()) continue;
+                    String [] datos = linea.split (";");
+                    if (datos[0].equals(id)) {
+                        String id = datos[0];
+                        String nombre = datos[1];
+                        String edad = datos[2];
+                        String Descuento = datos[3];
+                    }
+                }
+            } catch (IOException e) {
+            System.out.println("Error al guardar estudiante: " + e.getMessage());
+        }
     }
+    
     
     public void lista () {
         
