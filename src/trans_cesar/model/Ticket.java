@@ -24,7 +24,7 @@ public class Ticket implements Imprimible, Calculable {
         this.fechaCompra = fechaCompra;
         this.OrigenCiudad = OrigenCiudad;
         this.DestinoCiudad = DestinoCiudad;
-        this.PrecioFinal = PrecioFinal;
+        this.PrecioFinal = calcularTotal();
         this.pasajero = pasajero;
         this.vehiculo = vehiculo;
     }
@@ -84,13 +84,25 @@ public class Ticket implements Imprimible, Calculable {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
-        @Override
-    public void imprimirDetalle() {
-         
-    }
-
+    
+    
     @Override
     public double calcularTotal() {
-        return PrecioFinal;
+        double tarifa = vehiculo.getTarifa();
+        double Descuento = pasajero.calcularDescuento();
+        return tarifa -(tarifa*Descuento);
     }
+    
+        @Override
+    public void imprimirDetalle() {
+         System.out.println("TICKET");
+         System.out.println("Numero de Ticket: " + getNumeroTicket());
+         System.out.println("Fecha de Compra: " + getFechaCompra());
+         System.out.println("Nombre del Pasajero: " + pasajero.getNombre());
+         System.out.println("Placa del Vehiculo: " + vehiculo.getPlaca());
+         System.out.println("Ciudad de Origen: " + getOrigenCiudad());
+         System.out.println("Ciudad de Destino: " + getDestinoCiudad());
+         System.out.println("Precio Final del Ticket: $" + getPrecioFinal());
+    }
+
 }
