@@ -9,6 +9,7 @@ import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
 import MODEL.Vehiculo;
+import SERVICES.vehiculoServices;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,6 +25,10 @@ public class Menu {
         BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
         
         int opc = 0;
+        
+        VehiculoDAO vd = null;
+        vehiculoServices vs = null;
+        Vehiculo v = null;
         
         
         while (opc !=5) {            
@@ -87,7 +92,6 @@ public class Menu {
                 
                 //identificacion de tipo de vehiculo para registrar
                 
-                Vehiculo v = null;
                 
                 switch (tipo) {
                     case 1:
@@ -107,13 +111,37 @@ public class Menu {
                 
                 //guardado en archivo
                 
-                VehiculoDAO vd = null;
-                
                 vd.guardarVehiculo(v);
                 
                 break;
                 
             case 2:
+                
+                System.out.println("╔════════════════════════════════════╗");
+                System.out.println("║         BUSCAR VEHÍCULO            ║");
+                System.out.println("╠════════════════════════════════════╣");
+                System.out.print("║  Ingrese la placa: ");
+                String p = leer.readLine();
+                System.out.println("╚════════════════════════════════════╝");
+                
+                try {
+                    
+                    vs.validarBusqueda(p);
+                    
+                        System.out.println("╔════════════════════════════════════╗");
+                        System.out.println("║       VEHÍCULO ENCONTRADO          ║");
+                        System.out.println("╠════════════════════════════════════╣");
+                        System.out.println("║  Placa:      " + v.getPlaca());
+                        System.out.println("║  Ruta:       " + v.getRuta());
+                        System.out.println("║  Capacidad:  " + v.getCapacidad());
+                        System.out.println("║  Tarifa:     " + v.getTarifa());
+                        System.out.println("║  Disponible: " + v.isDisponible());
+                        System.out.println("╚════════════════════════════════════╝");
+
+                    
+                } catch (Exception e) {
+                    System.out.println("Erro de tipo " + e);
+                }
                 
                 break;
                 

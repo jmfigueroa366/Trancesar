@@ -4,6 +4,7 @@
  */
 package SERVICES;
 
+import DAO.VehiculoDAO;
 import MODEL.Vehiculo;
 import MODEL.Bus;
 import MODEL.Buseta;
@@ -14,6 +15,8 @@ import MODEL.MicroBus;
  * @author alvar
  */
 public class vehiculoServices {
+   
+    VehiculoDAO dao;
 
     public void validarCapacidad(Vehiculo v)throws Exception {
         
@@ -47,6 +50,19 @@ public class vehiculoServices {
         
     }
     
-    
+    public Vehiculo validarBusqueda(String placa)throws Exception{
+        
+        if (placa == null || placa.trim().isEmpty()) {
+        throw new Exception("La placa no puede estar vacía");
+        }
 
+        Vehiculo v = dao.buscarPorPlaca(placa); // ← aquí llama al DAO
+
+        if (v == null) {
+            throw new Exception("No existe un vehiculo con la placa: " + placa);
+        }
+
+        return v;
+        
+    }
 }
