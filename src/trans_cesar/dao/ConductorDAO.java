@@ -59,5 +59,43 @@ public class ConductorDAO {
         }
         return null;
     } 
+    public List<Conductor> listarTodos() {
+        List<Conductor> lista = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader (
+            new FileReader (RutaArchivos.Conductores))) {
+            String linea;
+            while ((linea = br.readLine()) !=null) {
+                if (linea.trim().isEmpty()) continue; 
+                    String[] datos = linea.split(";"); {
+                    int id = Integer.parseInt(datos[0]) ;
+                    String nombre = datos[1];
+                    LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
+                    int numeroLicencia = Integer.parseInt(datos[3]);
+                    String categoriaLicencia = datos [4];
+                    lista.add( new Conductor (numeroLicencia, categoriaLicencia, id, nombre, fechaNacimiento));
+                    }
+            }
+        } catch (IOException e) {
+                    System.out.println("Error al guardar estudiante: " + e.getMessage());
+                }
+        return lista;
+    }
     
+    public void eliminarPasajero(int id) {
+        List<Conductor> conductor = listarTodos();
+        try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Pasajeros, false))) {
+            for (Conductor c : conductor) {
+                if (c.getId()!=id) {
+                    bw.write(c.getId()+";"+c.getNombre()+";"+c.getFechaNacimiento()+";"+c.getNumeroLicencia()+";"+c.getCategoriaLicencia());
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al eliminar pasajero: " + e.getMessage());
+        }
+    }
+    
+    public boolean existeId(String id) {
+        return BuscarId(id) != null;
+    }
 }
