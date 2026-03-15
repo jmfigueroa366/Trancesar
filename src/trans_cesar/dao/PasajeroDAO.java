@@ -4,10 +4,7 @@
  */
 package trans_cesar.dao;
 
-import trans_cesar.model.Conductor;
 import trans_cesar.model.Pasajero;
-import trans_cesar.model.Persona;
-import trans_cesar.model.Ticket;
 import trans_cesar.model.PasajeroRegular;
 import trans_cesar.model.PasajeroEstudiante;
 import trans_cesar.model.PasajeroAdultoMayor;
@@ -131,13 +128,20 @@ public class PasajeroDAO {
         return lista;
     }
     
-    public void eliminarPasajero(String cedula) {
+    public void eliminarPasajero(int id) {
         List<Pasajero> pasajeros = listarTodos();
-        try (BufferedWriter bw = new BufferedWriter) {
+        try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Pasajeros, false))) {
             for (Pasajero p : pasajeros) {
-                if (!p.getCedula().equals(cedula)) {
-                    String tipo = p.getClass().getSimpleName().toUpperCase();
-                    bw.write(tipo + ";" + p.getCedula() + ";" + p.getNombre() + ";" + p.getFechaNacimiento());
+                if (p.getId()!=id) {
+                    String tipo;
+                    if (pasajeros instanceof PasajeroRegular) {
+                        tipo = "Pasajero Regular";
+                    } else if (pasajeros instanceof PasajeroEstudiante) {
+                        tipo = "Pasajero Estudiante";
+                    } else {
+                        tipo = "Pasajero Adulto Mayor";
+                    }
+                    bw.write(p.getId()+";"+p.getNombre()+";"+p.getFechaNacimiento()+";"+tipo+";"+p.calcularDescuento());
                     bw.newLine();
                 }
             }
@@ -145,7 +149,6 @@ public class PasajeroDAO {
             System.err.println("Error al eliminar pasajero: " + e.getMessage());
         }
     }
-
 
 }
 
