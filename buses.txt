@@ -1,1 +1,0 @@
-G4AY-17;buses.txt;45;20000.0;true
