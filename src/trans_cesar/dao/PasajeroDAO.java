@@ -8,13 +8,18 @@ import trans_cesar.model.Conductor;
 import trans_cesar.model.Pasajero;
 import trans_cesar.model.Persona;
 import trans_cesar.model.Ticket;
+import trans_cesar.model.PasajeroRegular;
+import trans_cesar.model.PasajeroEstudiante;
+import trans_cesar.model.PasajeroAdultoMayor;
 import trans_cesar.util.RutaArchivos;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.BufferedWriter; 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter; 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  *
@@ -22,13 +27,26 @@ import java.io.IOException;
  */
 public class PasajeroDAO {
     
+    ArrayList <Pasajero> p = new ArrayList<>(); 
+    
     public void guardar(Pasajero pasajero) throws IOException {
+        
         try (BufferedWriter bw = new BufferedWriter ( 
                 new FileWriter (RutaArchivos.Pasajeros, true))) {
+                    String tipo;
+                    if (pasajero instanceof PasajeroRegular) {
+                        tipo = "Pasajero Regular";
+                    } else if (pasajero instanceof PasajeroEstudiante) {
+                        tipo = "Pasajero Estudiante";
+                    } else {
+                        tipo = "Pasajero Adulto Mayor";
+                    }
+                    
             bw.write(pasajero.getId() + ";" +
                      pasajero.getNombre() + ";" +
-                     pasajero.getEdad() + ";" +
-                     pasajero.getDescuento());
+                     pasajero.getFechaNacimiento() + ";" +
+                     tipo + ";" +
+                     pasajero.calcularDescuento());
                     bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar estudiante: " + e.getMessage());
@@ -36,7 +54,7 @@ public class PasajeroDAO {
     }
     
     
-    public void BuscarId (String id) {
+    public Pasajero BuscarId (String id) {
         try (BufferedReader br = new BufferedReader (
                 new FileReader (RutaArchivos.Pasajeros))) {
                 String linea; 
@@ -44,20 +62,90 @@ public class PasajeroDAO {
                     if (linea.trim().isEmpty()) continue;
                     String [] datos = linea.split (";");
                     if (datos[0].equals(id)) {
-                        String id = datos[0];
+                        String ide = datos[0];
                         String nombre = datos[1];
-                        String edad = datos[2];
-                        String Descuento = datos[3];
+                        LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
+                        String tipo = datos[3];
+                        double Descuento = Double.parseDouble(datos[4]);
+                        
+                        Pasajero pasajero;
+                    switch (tipo) {
+                        case "Pasajero Regular":
+                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            break;
+                        case "Pasajero Estudiante":
+                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            break;
+                        case "Pasajero Adulto Mayor":
+                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            break;
+                        default:
+                            pasajero=null;
+                    } 
+                    return pasajero;
                     }
                 }
             } catch (IOException e) {
             System.out.println("Error al guardar estudiante: " + e.getMessage());
         }
+        return null;
     }
     
     
-    public void lista () {
-        
+    public List<Pasajero> listarTodos() {
+        List<Pasajero> lista = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader (
+            new FileReader (RutaArchivos.Pasajeros))) {
+            String linea;
+            while ((linea = br.readLine()) !=null) {
+                if (linea.trim().isEmpty()) continue; 
+                    String[] datos = linea.split(";"); {
+                    int id = Integer.parseInt(datos[0]) ;
+                    String nombre = datos[1];
+                    LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
+                    String tipo = datos[3];
+                    double Descuento = Double.parseDouble(datos[4]) ;
+                    
+                    Pasajero pasajero;
+                    switch (tipo) {
+                        case "Pasajero Regular":
+                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            break;
+                        case "Pasajero Estudiante":
+                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            break;
+                        case "Pasajero Adulto Mayor":
+                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            break;
+                        default:
+                            pasajero=null;
+                    } 
+                    
+                if (pasajero !=null) {
+                    lista.add(pasajero);
+                }
+            }
+        } } catch (IOException e) {
+                    System.out.println("Error al guardar estudiante: " + e.getMessage());
+                }
+        return lista;
     }
+    
+    public void eliminarPasajero(String cedula) {
+        List<Pasajero> pasajeros = listarTodos();
+        try (BufferedWriter bw = new BufferedWriter) {
+            for (Pasajero p : pasajeros) {
+                if (!p.getCedula().equals(cedula)) {
+                    String tipo = p.getClass().getSimpleName().toUpperCase();
+                    bw.write(tipo + ";" + p.getCedula() + ";" + p.getNombre() + ";" + p.getFechaNacimiento());
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al eliminar pasajero: " + e.getMessage());
+        }
+    }
+
+
 }
 
