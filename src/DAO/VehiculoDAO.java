@@ -146,15 +146,15 @@ public class VehiculoDAO {
                 Vehiculo v = null;
                 
                 if (tipo.equals("Bus")) {
-                    v=new Bus(capacidad, tarifa, placa, ruta, disponible);
+                    v=new Bus(capacidad, tarifa, placa, rutaVehiculo, disponible);
                 }
                 
                 if (tipo.equals("Buseta")) {
-                    v=new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                    v=new Buseta(capacidad, tarifa, placa, rutaVehiculo, disponible);
                 }
  
                 if (tipo.equals("MicroBus")) {
-                    v=new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                    v=new MicroBus(capacidad, tarifa, placa, rutaVehiculo, disponible);
                 }
                 
                 if (v!=null) {
