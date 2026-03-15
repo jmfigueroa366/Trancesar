@@ -59,7 +59,7 @@ public class PasajeroDAO {
                     if (linea.trim().isEmpty()) continue;
                     String [] datos = linea.split (";");
                     if (datos[0].equals(id)) {
-                        String ide = datos[0];
+                        int ide = Integer.parseInt(datos[0]);
                         String nombre = datos[1];
                         LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
                         String tipo = datos[3];
