@@ -79,7 +79,7 @@ public class menuVehiculo {
                 System.out.print("|  Ruta: ");
                 String ruta = leer.readLine();
 
-                System.out.print("|  Tarifa: ");
+                System.out.print("|  Tarifa base (BUSETA=8K MICROBUS=10K BUS=15K): ");
                 float tarifa = Float.parseFloat(leer.readLine());
 
                 System.out.print("|  Disponible (true/false): ");
@@ -89,7 +89,8 @@ public class menuVehiculo {
                 
                 //identificacion de tipo de vehiculo para registrar
                 
-                
+                try {
+                    
                 switch (tipo) {
                     case 1:
                         v = new Bus(45, tarifa, placa, ruta, disponible);
@@ -116,6 +117,9 @@ public class menuVehiculo {
                         System.out.println("INGRESE UNA OPCION DEL MENU");
                 }
                 
+                } catch (Exception e) {
+                    System.out.println("ERROR DE TIPO " + e);
+                }
                 
                 break;
                 
@@ -130,7 +134,7 @@ public class menuVehiculo {
                 
                 try {
                     
-                    vs.validarBusqueda(p);
+                    v=vs.validarBusqueda(p);
                     
                         System.out.println("╔=============================");
                         System.out.println("|       VEHÍCULO ENCONTRADO          |");

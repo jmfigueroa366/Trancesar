@@ -19,23 +19,25 @@ public class vehiculoServices {
    
     VehiculoDAO dao= new VehiculoDAO();
     
-    public void validarRegistro(Vehiculo v)throws Exception{
-        
+    public void validarRegistro(Vehiculo v) throws Exception {
+
         if (v.getPlaca().trim().isEmpty()) {
-            throw new Exception("Se necesota una placa para el vehiculo");
+            throw new Exception("Se necesita una placa para el vehiculo");
         }
-        
+
         if (v.getRuta().trim().isEmpty()) {
-            throw new Exception ("Se necesita la ruta para continuar");
+            throw new Exception("Se necesita la ruta para continuar");
         }
-        
+
         validarCapacidad(v);
-        
+
         validarTarifa(v);
-        
-        if (dao.exisPlaca(v.getPlaca())) {
-            throw new Exception ("Esta placa ya existe");
+
+        if (dao.exisPlaca(v.getPlaca())) {  // ← primero valida
+            throw new Exception("Esta placa ya existe");
         }
+
+        dao.guardarVehiculo(v);  // ← al final guarda
     }
 
     public void validarCapacidad(Vehiculo v)throws Exception {

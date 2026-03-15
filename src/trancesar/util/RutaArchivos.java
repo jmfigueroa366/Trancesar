@@ -11,9 +11,8 @@ package trancesar.util;
 public class RutaArchivos {
     
     //Rutas archivos de entidades derivadas de vehiculos
-    public static final String vehiculos="Trancesar/vehiculos.txt";
-    public static final String busetas="Trancesar/vehiculos.txt";
-    public static final String microBusetas="Trancesar/busetas.txt";
-    public static final String buses="Trancesar/buses.txt";
+    public static final String busetas = "busetas.txt";
+    public static final String microBusetas = "microbus.txt";
+    public static final String buses = "buses.txt";
     
 }

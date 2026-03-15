@@ -153,7 +153,7 @@ public class VehiculoDAO {
                     v=new Buseta(capacidad, tarifa, placa, ruta, disponible);
                 }
  
-                if (tipo.equals("McroBus")) {
+                if (tipo.equals("MicroBus")) {
                     v=new MicroBus(capacidad, tarifa, placa, ruta, disponible);
                 }
                 
