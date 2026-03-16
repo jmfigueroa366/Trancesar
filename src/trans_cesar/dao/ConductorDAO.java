@@ -81,7 +81,7 @@ public class ConductorDAO {
         return lista;
     }
     
-    public void eliminarPasajero(int id) {
+    public void eliminarConductor(int id) {
         List<Conductor> conductor = listarTodos();
         try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Pasajeros, false))) {
             for (Conductor c : conductor) {

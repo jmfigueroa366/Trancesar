@@ -98,7 +98,7 @@ public class Ticket implements Imprimible, Calculable {
          System.out.println("TICKET");
          System.out.println("Numero de Ticket: " + getNumeroTicket());
          System.out.println("Fecha de Compra: " + getFechaCompra());
-         System.out.println("Nombre del Pasajero: " + pasajero.getNombre());
+         System.out.println("Nombre del Pasajero: " + pasajero.getId());
          System.out.println("Placa del Vehiculo: " + vehiculo.getPlaca());
          System.out.println("Ciudad de Origen: " + getOrigenCiudad());
          System.out.println("Ciudad de Destino: " + getDestinoCiudad());

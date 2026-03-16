@@ -30,16 +30,17 @@ public class TicketDAO {
                     
             bw.write(ticket.getNumeroTicket() + ";" +
                      ticket.getFechaCompra() + ";" +
-                     ticket.getPasajero().getNombre() + ";" +
-                     ticket.getVehiculo().getPlaca + ";" +
                      ticket.getOrigenCiudad() + ";" +
                      ticket.getDestinoCiudad() + ";" +
-                     ticket.getPrecioFinal());
+                     ticket.getPrecioFinal() + ";" + 
+                     ticket.getPasajero().getId() + ";" +
+                     ticket.getVehiculo().getPlaca());
                     bw.newLine();
         } catch (IOException e) {
             System.out.println("Error al guardar estudiante: " + e.getMessage());
         }
     }
+    PasajeroDAO p = new PasajeroDAO();
     
     public Ticket BuscarNumeroTicket (String NumeroTicket) {
         try (BufferedReader br = new BufferedReader (
@@ -51,13 +52,13 @@ public class TicketDAO {
                     if (datos[0].equals(NumeroTicket)) {
                         int NumTicket = Integer.parseInt(datos[0]);
                         LocalDate fechaCompra = LocalDate.parse(datos[1]);
-                        String NombrePasajero = datos[2];
-                        float PlacaVehiculo = Float.parseFloat(datos[3]);
-                        String OrigenCiudad = datos[4];
-                        String DestinoCiudad = datos[5];
-                        double PrecioFinal = Double.parseDouble(datos[6]);
-                        
-                        return new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, NombrePasajero, PlacaVehiculo);
+                        String OrigenCiudad = datos[2];
+                        String DestinoCiudad = datos[3];
+                        double PrecioFinal = Double.parseDouble(datos[4]);
+                        String idPasajero = datos[5];
+                        Pasajero IdP = p.BuscarId(idPasajero);
+                        float PlacaVehiculo = Float.parseFloat(datos[6]);
+                        return new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, PlacaVehiculo);
                     }
                 }
             } catch (IOException e) {
@@ -65,4 +66,48 @@ public class TicketDAO {
         }
         return null;
     } 
+    
+    public List<Ticket> listarTodos() {
+        List<Ticket> lista = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader (
+            new FileReader (RutaArchivos.Ticket))) {
+            String linea;
+            while ((linea = br.readLine()) !=null) {
+                if (linea.trim().isEmpty()) continue; 
+                    String[] datos = linea.split(";"); {
+                    int NumTicket = Integer.parseInt(datos[0]);
+                    LocalDate fechaCompra = LocalDate.parse(datos[1]);
+                    String OrigenCiudad = datos[2];
+                    String DestinoCiudad = datos[3];
+                    double PrecioFinal = Double.parseDouble(datos[4]);
+                    String idPasajero = datos[5];
+                    Pasajero IdP = p.BuscarId(idPasajero);
+                    float PlacaVehiculo = Float.parseFloat(datos[6]);
+                  
+                    lista.add( new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, PlacaVehiculo));
+                    }
+            }
+        } catch (IOException e) {
+                    System.out.println("Error al guardar estudiante: " + e.getMessage());
+                }
+        return lista;
+    }
+    
+    public void eliminarTicket(int NumeroTicket) {
+        List<Ticket> ticket = listarTodos();
+        try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Ticket, false))) {
+            for (Ticket t : ticket) {
+                if (t.getNumeroTicket()!=NumeroTicket) {
+                    bw.write(t.getNumeroTicket()+";"+t.getDestinoCiudad()+";"+t.getOrigenCiudad()+";"+t.getPrecioFinal()+";"+t.getPasajero()+";"+t.getVehiculo());
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error al eliminar pasajero: " + e.getMessage());
+        }
+    }
+    
+    public boolean existeNumeroTicket(String NumeroTicket) {
+        return BuscarNumeroTicket(NumeroTicket) != null;
+    }
 }
