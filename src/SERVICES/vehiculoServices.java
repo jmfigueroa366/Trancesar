@@ -25,7 +25,7 @@ public class vehiculoServices {
             throw new Exception("Se necesita una placa para el vehiculo");
         }
 
-        if (v.getRuta().trim().isEmpty()) {
+        if (v.getRuta().getCodigo().trim().isEmpty()) {
             throw new Exception("Se necesita la ruta para continuar");
         }
 
