@@ -32,7 +32,7 @@ public class RutaDAO {
         }
     }
     
-     public Ruta buscarPorCodigo(String codigo) {
+    public Ruta buscarPorCodigo(String codigo) {
         try (BufferedReader br = new BufferedReader(
                 new FileReader(RutaArchivos.rutas))) {
             String linea;
@@ -50,4 +50,17 @@ public class RutaDAO {
         }
         return null;
     }
+     
+    public boolean existeCodigo(String codigo){
+        
+        Ruta r=buscarPorCodigo(codigo);
+        
+        if (r!=null) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
+     
 }
