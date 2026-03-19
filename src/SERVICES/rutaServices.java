@@ -58,4 +58,19 @@ public class rutaServices {
         
     }
     
+    public Ruta buscar(String codigo) throws Exception {
+        
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new Exception("El código no puede estar vacío");
+        }
+        
+        Ruta r = dao.buscarPorCodigo(codigo);
+        
+        if (r == null) {
+            throw new Exception("No existe una ruta con el código: " + codigo);
+        }
+        
+        return r;
+    }
+    
 }
