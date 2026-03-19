@@ -23,10 +23,12 @@ import java.time.LocalDate;
 public class TicketDAO {
     ArrayList <Ticket> t = new ArrayList<>(); 
     
+    
+    
     public void guardar(Ticket ticket) throws IOException {
         
         try (BufferedWriter bw = new BufferedWriter ( 
-                new FileWriter (RutaArchivos.Conductores, true))) {
+                new FileWriter (RutaArchivos.Ticket, true))) {
                     
             bw.write(ticket.getNumeroTicket() + ";" +
                      ticket.getFechaCompra() + ";" +
