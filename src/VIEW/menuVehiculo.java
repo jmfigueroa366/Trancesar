@@ -7,6 +7,8 @@ import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
 import MODEL.Vehiculo;
+import MODEL.Ruta;
+import SERVICES.rutaServices;
 import SERVICES.vehiculoServices;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -76,8 +78,26 @@ public class menuVehiculo {
                 System.out.print("|  Placa: ");
                 String placa = leer.readLine();
 
-                System.out.print("|  Ruta: ");
-                String ruta = leer.readLine();
+                rutaServices rs = new rutaServices();
+                
+                try {
+                            List<Ruta> rutas = rs.listar();
+                            System.out.println("==============================");
+                            System.out.println("|       RUTAS DISPONIBLES            |");
+                            System.out.println("==============================");
+                            
+                            for (Ruta r : rutas) {
+                                System.out.println("|  " + r.getCodigo() + " - " + 
+                               r.getC_origen() + " → " + r.getC_destino());
+                            }
+                            System.out.println("==============================");
+                            
+                } catch (Exception e) {
+                    System.out.println("No hay rutas registradas: " + e.getMessage());
+                }
+                
+                System.out.print("|  Código de ruta: ");
+                String codigoRuta = leer.readLine();
 
                 System.out.print("|  Tarifa base (BUSETA=8K MICROBUS=10K BUS=15K): ");
                 float tarifa = Float.parseFloat(leer.readLine());
@@ -91,23 +111,25 @@ public class menuVehiculo {
                 
                 try {
                     
+                Ruta rutaSeleccionada = rs.buscar(codigoRuta);
+                    
                 switch (tipo) {
                     case 1:
-                        v = new Bus(45, tarifa, placa, ruta, disponible);
+                        v = new Bus(45, tarifa, placa, rutaSeleccionada, disponible);
                         
                         vs.validarRegistro(v);
                         
                         break;
                         
                     case 2:
-                        v = new Buseta(19, tarifa, placa, ruta, disponible);
+                        v = new Buseta(19, tarifa, placa, rutaSeleccionada, disponible);
                         
                         vs.validarRegistro(v);
                         
                         break;
                         
                     case 3:
-                        v = new MicroBus(25, tarifa, placa, ruta, disponible);
+                        v = new MicroBus(25, tarifa, placa, rutaSeleccionada, disponible);
                         
                         vs.validarRegistro(v);
                         
@@ -140,7 +162,7 @@ public class menuVehiculo {
                         System.out.println("|       VEHÍCULO ENCONTRADO          |");
                         System.out.println("==============================");
                         System.out.println("|  Placa:      " + v.getPlaca());
-                        System.out.println("|  Ruta:       " + v.getRuta());
+                        System.out.println("|  Ruta:       " + v.getRuta().getCodigo());
                         System.out.println("|  Capacidad:  " + v.getCapacidad());
                         System.out.println("|  Tarifa:     " + v.getTarifa());
                         System.out.println("|  Disponible: " + v.isDisponible());
@@ -183,7 +205,7 @@ public class menuVehiculo {
                     
                     for (Vehiculo ve : lista) {
                         System.out.println("|  Placa:      " + ve.getPlaca());
-                        System.out.println("|  Ruta:       " + ve.getRuta());
+                        System.out.println("|  Ruta:       " + ve.getRuta().getCodigo());
                         System.out.println("|  Capacidad:  " + ve.getCapacidad());
                         System.out.println("|  Tarifa:     " + ve.getTarifa());
                         System.out.println("|  Disponible: " + ve.isDisponible());
