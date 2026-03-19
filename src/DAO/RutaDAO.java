@@ -5,7 +5,9 @@
 package DAO;
 
 import MODEL.Ruta;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import trancesar.util.RutaArchivos;
@@ -30,4 +32,22 @@ public class RutaDAO {
         }
     }
     
+     public Ruta buscarPorCodigo(String codigo) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(RutaArchivos.rutas))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+                String[] datos = linea.split(";");
+                if (datos[0].equals(codigo)) {
+                    return new Ruta(datos[0], datos[1], datos[2],
+                                    Float.parseFloat(datos[3]),
+                                    Float.parseFloat(datos[4]));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error buscando ruta: " + e.getMessage());
+        }
+        return null;
+    }
 }
