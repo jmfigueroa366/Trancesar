@@ -4,6 +4,7 @@
  */
 package VIEW;
 
+import MODEL.Ruta;
 import SERVICES.rutaServices;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,9 +48,52 @@ public class menuRutas {
             switch (opc) {
                 case 1:
                     
+                    System.out.println("==============================");
+                    System.out.println("|       REGISTRAR RUTA               |");
+                    System.out.println("==============================");
+                    
+                    System.out.print("|  Código: ");
+                    String codigo = leer.readLine();
+                    
+                    System.out.print("|  Ciudad origen: ");
+                    String origen = leer.readLine();
+                    
+                    System.out.print("|  Ciudad destino: ");
+                    String destino = leer.readLine();
+                    
+                    System.out.print("|  Distancia (km): ");
+                    float distancia = Float.parseFloat(leer.readLine());
+                    
+                    System.out.print("|  Tiempo estimado (min): ");
+                    float tiempo = Float.parseFloat(leer.readLine());
+                    
+                    System.out.println("==============================");
+                    
+                    try {
+                        
+                        Ruta r = new Ruta(codigo, origen, destino, distancia, tiempo);
+                        
+                        rs.registrar(r);
+                        
+                        System.out.println("Ruta registrada correctamente");
+                        
+                    } catch (Exception e) {
+                        
+                        System.out.println("Error: " + e.getMessage());
+                        
+                    }
+                    
                     break;
+                 
+                case 2:
+                    
+                    
+                    
+                    break;
+                 
                 default:
                     System.out.println("INGRESE UNA OPCION DEL MENÚ");
+                    
             }
             
         }
