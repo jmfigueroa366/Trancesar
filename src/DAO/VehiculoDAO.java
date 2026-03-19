@@ -7,6 +7,7 @@ package DAO;
 import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
+import MODEL.Ruta;
 import MODEL.Vehiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,7 +43,7 @@ public class VehiculoDAO {
         try (BufferedWriter bw = new BufferedWriter(
                 new FileWriter(ruta, true))) {
             bw.write(v.getPlaca() + ";" + 
-                     v.getRuta() + ";" + 
+                     v.getRuta().getCodigo() + ";" + 
                      v.getCapacidad() + ";" + 
                      v.getTarifa() + ";" +
                      v.isDisponible());
@@ -86,18 +87,22 @@ public class VehiculoDAO {
                 float tarifa = Float.parseFloat(datos[3]);
                 boolean disponible = Boolean.parseBoolean(datos[4]);
                 
+                RutaDAO rutaDAO = new RutaDAO();
+                
+                Ruta rutaobj = rutaDAO.buscarPorCodigo(rutaVehiculo);
+                
                 if (placa.equals(placaBuscada)) {
                     
                     if (tipo.equals("Bus")) {
-                        return new Bus(capacidad, tarifa, placa, ruta, disponible);
+                        return new Bus(capacidad, tarifa, placa, rutaobj, disponible);
                     }
                     
                     if (tipo.equals("MicroBus")) {
-                        return new MicroBus(capacidad, tarifa, placa, ruta, disponible);
+                        return new MicroBus(capacidad, tarifa, placa, rutaobj, disponible);
                     }
                     
                     if (tipo.equals("Buseta")) {
-                        return new Buseta(capacidad, tarifa, placa, ruta, disponible);
+                        return new Buseta(capacidad, tarifa, placa, rutaobj, disponible);
                     }
                     
                 }
@@ -204,7 +209,5 @@ public class VehiculoDAO {
         }else{
             return false;
         }
-        
-        
     }
 }
