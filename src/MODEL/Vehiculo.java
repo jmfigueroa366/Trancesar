@@ -13,13 +13,13 @@ public abstract class Vehiculo {
     private int capacidad;
     private float tarifa;
     private String placa;
-    private String ruta;
+    private Ruta ruta;
     private boolean disponible;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(int capacidad, float tarifa, String placa, String ruta, boolean disponible) {
+    public Vehiculo(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible) {
         this.capacidad = capacidad;
         this.tarifa = tarifa;
         this.placa = placa;
@@ -51,11 +51,11 @@ public abstract class Vehiculo {
         this.placa = placa;
     }
 
-    public String getRuta() {
+    public Ruta getRuta() {
         return ruta;
     }
 
-    public void setRuta(String ruta) {
+    public void setRuta(Ruta ruta) {
         this.ruta = ruta;
     }
 
@@ -65,5 +65,5 @@ public abstract class Vehiculo {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
-    }    
+    }
 }
