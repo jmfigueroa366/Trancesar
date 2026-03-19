@@ -87,7 +87,32 @@ public class menuRutas {
                  
                 case 2:
                     
+                    System.out.println("==============================");
+                    System.out.println("|         BUSCAR RUTA                |");
+                    System.out.println("==============================");
+                    System.out.print("|  Ingrese el código: ");
+                    String cod = leer.readLine();
+                    System.out.println("==============================");
                     
+                    try {
+                        
+                        Ruta r= rs.buscar(cod);
+                        
+                        System.out.println("==============================");
+                        System.out.println("|       RUTA ENCONTRADA              |");
+                        System.out.println("==============================");
+                        System.out.println("|  Código:   " + r.getCodigo());
+                        System.out.println("|  Origen:   " + r.getC_origen());
+                        System.out.println("|  Destino:  " + r.getC_destino());
+                        System.out.println("|  Distancia:" + r.getDistancia() + " km");
+                        System.out.println("|  Tiempo:   " + r.getTiempo() + " min");
+                        System.out.println("==============================");
+                        
+                    } catch (Exception e) {
+                        
+                        System.out.println("Error de tipo: " + e);
+                        
+                    }
                     
                     break;
                  
@@ -99,7 +124,4 @@ public class menuRutas {
         }
         
     }
-    
-      
-    
 }
