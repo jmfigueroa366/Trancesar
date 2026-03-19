@@ -150,5 +150,8 @@ public class PasajeroDAO {
         }
     }
 
+    public boolean existeId(String id) {
+        return BuscarId(id) != null;
+    }
 }
 
