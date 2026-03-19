@@ -14,5 +14,6 @@ public class RutaArchivos {
     public static final String busetas = "busetas.txt";
     public static final String microBusetas = "microbus.txt";
     public static final String buses = "buses.txt";
+    public static final String rutas = "rutas.txt";
     
 }
