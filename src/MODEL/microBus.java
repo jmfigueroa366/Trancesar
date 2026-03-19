@@ -13,7 +13,7 @@ public class MicroBus extends Vehiculo{
     public MicroBus() {
     }
     
-    public MicroBus(int capacidad, float tarifa, String placa, String ruta, boolean disponible){
+    public MicroBus(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible){
         super(capacidad, tarifa, placa, ruta, disponible);
     }
 }

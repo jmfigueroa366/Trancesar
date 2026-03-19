@@ -13,7 +13,7 @@ public class Buseta extends Vehiculo{
     public Buseta() {
     }
     
-    public Buseta(int capacidad, float tarifa, String placa, String ruta, boolean disponible){
+    public Buseta(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible){
         super(capacidad, tarifa, placa, ruta, disponible);
     }
     
