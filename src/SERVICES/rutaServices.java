@@ -6,6 +6,7 @@ package SERVICES;
 
 import DAO.RutaDAO;
 import MODEL.Ruta;
+import java.util.List;
 
 /**
  *
@@ -17,15 +18,15 @@ public class rutaServices {
     
     public void registrar(Ruta r)throws Exception{
         
-        if (r.getCodigo().trim().isEmpty()) {
+        if (r.getCodigo()==null) {
             throw new Exception ("El campo del codigo está vacio");
         }
         
-        if (r.getC_destino().trim().isEmpty()) {
+        if (r.getC_destino()==null) {
             throw new Exception ("El campo del destino está vacio");
         }
         
-        if (r.getC_origen().trim().isEmpty()) {
+        if (r.getC_origen()==null) {
             throw new Exception ("El campo del origen está vacio");
         }
         
@@ -42,6 +43,18 @@ public class rutaServices {
         }
         
         dao.guardar(r);
+        
+    }
+    
+    public List<Ruta> listar() throws Exception{
+        
+        List<Ruta> lista= dao.listarTodas();
+        
+        if (lista.isEmpty()) {
+            throw new Exception ("La lista está vacia");
+        }
+        
+        return lista;
         
     }
     
