@@ -10,6 +10,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import trancesar.util.RutaArchivos;
 
 /**
@@ -61,6 +63,24 @@ public class RutaDAO {
             return false;
         }
         
+    }
+    
+    public List<Ruta> listarTodas() {
+        List<Ruta> lista = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(RutaArchivos.rutas))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+                String[] datos = linea.split(";");
+                lista.add(new Ruta(datos[0], datos[1], datos[2],
+                                   Float.parseFloat(datos[3]),
+                                   Float.parseFloat(datos[4])));
+            }
+        } catch (IOException e) {
+            System.out.println("Error listando rutas: " + e.getMessage());
+        }
+        return lista;
     }
      
 }
