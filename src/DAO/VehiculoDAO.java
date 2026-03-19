@@ -144,18 +144,22 @@ public class VehiculoDAO {
                 float tarifa = Float.parseFloat(datos[3]);
                 boolean disponible = Boolean.parseBoolean(datos[4]);
                 
+                RutaDAO rutaDAO = new RutaDAO();
+                
+                Ruta rutaobj = rutaDAO.buscarPorCodigo(rutaVehiculo);
+                
                 Vehiculo v = null;
                 
                 if (tipo.equals("Bus")) {
-                    v=new Bus(capacidad, tarifa, placa, rutaVehiculo, disponible);
+                    v=new Bus(capacidad, tarifa, placa, rutaobj, disponible);
                 }
                 
                 if (tipo.equals("Buseta")) {
-                    v=new Buseta(capacidad, tarifa, placa, rutaVehiculo, disponible);
+                    v=new Buseta(capacidad, tarifa, placa, rutaobj, disponible);
                 }
  
                 if (tipo.equals("MicroBus")) {
-                    v=new MicroBus(capacidad, tarifa, placa, rutaVehiculo, disponible);
+                    v=new MicroBus(capacidad, tarifa, placa, rutaobj, disponible);
                 }
                 
                 if (v!=null) {
