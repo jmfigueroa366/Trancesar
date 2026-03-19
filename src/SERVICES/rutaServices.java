@@ -4,6 +4,7 @@
  */
 package SERVICES;
 
+import DAO.RutaDAO;
 import MODEL.Ruta;
 
 /**
@@ -11,6 +12,8 @@ import MODEL.Ruta;
  * @author alvar
  */
 public class rutaServices {
+    
+    RutaDAO dao = new RutaDAO();
     
     public void registrar(Ruta r)throws Exception{
         
@@ -33,6 +36,12 @@ public class rutaServices {
         if (r.getTiempo()<=0) {
             throw new Exception("El campo del tiempo está vacio");
         }
+        
+        if (dao.existeCodigo(r.getCodigo())) {
+            throw new Exception ("El codigo ingresado ya existe");
+        }
+        
+        dao.guardar(r);
         
     }
     
