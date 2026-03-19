@@ -4,10 +4,36 @@
  */
 package SERVICES;
 
+import MODEL.Ruta;
+
 /**
  *
  * @author alvar
  */
 public class rutaServices {
+    
+    public void registrar(Ruta r)throws Exception{
+        
+        if (r.getCodigo().trim().isEmpty()) {
+            throw new Exception ("El campo del codigo está vacio");
+        }
+        
+        if (r.getC_destino().trim().isEmpty()) {
+            throw new Exception ("El campo del destino está vacio");
+        }
+        
+        if (r.getC_origen().trim().isEmpty()) {
+            throw new Exception ("El campo del origen está vacio");
+        }
+        
+        if (r.getDistancia()<=0) {
+            throw new Exception ("El campo de la distancia está vacio");
+        }
+        
+        if (r.getTiempo()<=0) {
+            throw new Exception("El campo del tiempo está vacio");
+        }
+        
+    }
     
 }
