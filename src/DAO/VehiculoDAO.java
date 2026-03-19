@@ -23,10 +23,6 @@ import trancesar.util.RutaArchivos;
  */
 public class VehiculoDAO {
     
-    ArrayList <MicroBus> mbs=new ArrayList<>();
-    ArrayList <Bus> bs=new ArrayList<>();
-    ArrayList <Buseta> bts=new ArrayList<>();
-    
     public void guardarVehiculo(Vehiculo v){
         
         String ruta="";
