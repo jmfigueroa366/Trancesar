@@ -26,6 +26,7 @@ public class PasajeroDAO {
     
     ArrayList <Pasajero> p = new ArrayList<>(); 
     
+    
     public void guardar(Pasajero pasajero) throws IOException {
         
         try (BufferedWriter bw = new BufferedWriter ( 
@@ -59,7 +60,7 @@ public class PasajeroDAO {
                     if (linea.trim().isEmpty()) continue;
                     String [] datos = linea.split (";");
                     if (datos[0].equals(id)) {
-                        int ide = Integer.parseInt(datos[0]);
+                        String ide = datos[0];
                         String nombre = datos[1];
                         LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
                         String tipo = datos[3];
@@ -68,13 +69,13 @@ public class PasajeroDAO {
                         Pasajero pasajero;
                     switch (tipo) {
                         case "Pasajero Regular":
-                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular (Descuento, id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular(Descuento, id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroRegular(Integer.parseInt(id), nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular(Descuento, id, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;
@@ -97,7 +98,7 @@ public class PasajeroDAO {
             while ((linea = br.readLine()) !=null) {
                 if (linea.trim().isEmpty()) continue; 
                     String[] datos = linea.split(";"); {
-                    int id = Integer.parseInt(datos[0]) ;
+                    String id = datos[0] ;
                     String nombre = datos[1];
                     LocalDate fechaNacimiento = LocalDate.parse(datos[2]);
                     String tipo = datos[3];
@@ -106,13 +107,13 @@ public class PasajeroDAO {
                     Pasajero pasajero;
                     switch (tipo) {
                         case "Pasajero Regular":
-                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroRegular(id, nombre, fechaNacimiento, Descuento);
+                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;
@@ -128,11 +129,11 @@ public class PasajeroDAO {
         return lista;
     }
     
-    public void eliminarPasajero(int id) {
+    public void eliminarPasajero(String id) {
         List<Pasajero> pasajeros = listarTodos();
         try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Pasajeros, false))) {
             for (Pasajero p : pasajeros) {
-                if (p.getId()!=id) {
+                if (!p.getId().equals(id)) {
                     String tipo;
                     if (pasajeros instanceof PasajeroRegular) {
                         tipo = "Pasajero Regular";
@@ -146,7 +147,7 @@ public class PasajeroDAO {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error al eliminar pasajero: " + e.getMessage());
+            System.out.println("Error al eliminar pasajero: " + e.getMessage());
         }
     }
 

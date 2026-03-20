@@ -25,7 +25,7 @@ public class ConductorService {
     private final List<String> categoriasValidas = new ArrayList<> (
         Arrays.asList ("B1", "B2", "C1", "C2"));
     
-    public void validarRegistro (int numeroLicencia, String categoriaLicencia, int id, String nombre, LocalDate fechaNacimiento) 
+    public void validarRegistro (String numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) 
                 throws Exception {
         // Inicialmente s verifica que no exista diplicacion de ID
         if (conductorDAO.BuscarId(id) !=null ) {

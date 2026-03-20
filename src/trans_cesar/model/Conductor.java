@@ -11,20 +11,20 @@ import java.time.Period;
  * @author ANDREA CAROLINA
  */
 public class Conductor extends Persona {
-    private int numeroLicencia;
+    private String numeroLicencia;
     private String categoriaLicencia;
 
-    public Conductor(int numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) {
+    public Conductor(String numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) {
         super(id, nombre, fechaNacimiento);
         this.numeroLicencia = numeroLicencia;
         this.categoriaLicencia = categoriaLicencia;
     }
 
-    public int getNumeroLicencia() {
+    public String getNumeroLicencia() {
         return numeroLicencia;
     }
 
-    public void setNumeroLicencia(int numeroLicencia) {
+    public void setNumeroLicencia(String numeroLicencia) {
         this.numeroLicencia = numeroLicencia;
     }
 

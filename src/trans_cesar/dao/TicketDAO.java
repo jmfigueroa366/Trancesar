@@ -52,7 +52,7 @@ public class TicketDAO {
                     if (linea.trim().isEmpty()) continue;
                     String [] datos = linea.split (";");
                     if (datos[0].equals(NumeroTicket)) {
-                        int NumTicket = Integer.parseInt(datos[0]);
+                        String NumTicket = datos[0];
                         LocalDate fechaCompra = LocalDate.parse(datos[1]);
                         String OrigenCiudad = datos[2];
                         String DestinoCiudad = datos[3];
@@ -77,7 +77,7 @@ public class TicketDAO {
             while ((linea = br.readLine()) !=null) {
                 if (linea.trim().isEmpty()) continue; 
                     String[] datos = linea.split(";"); {
-                    int NumTicket = Integer.parseInt(datos[0]);
+                    String NumTicket = datos[0];
                     LocalDate fechaCompra = LocalDate.parse(datos[1]);
                     String OrigenCiudad = datos[2];
                     String DestinoCiudad = datos[3];
@@ -95,11 +95,11 @@ public class TicketDAO {
         return lista;
     }
     
-    public void eliminarTicket(int NumeroTicket) {
+    public void eliminarTicket(String NumeroTicket) {
         List<Ticket> ticket = listarTodos();
         try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Ticket, false))) {
             for (Ticket t : ticket) {
-                if (t.getNumeroTicket()!=NumeroTicket) {
+                if (!t.getNumeroTicket().equals(NumeroTicket)) {
                     bw.write(t.getNumeroTicket()+";"+t.getDestinoCiudad()+";"+t.getOrigenCiudad()+";"+t.getPrecioFinal()+";"+t.getPasajero()+";"+t.getVehiculo());
                     bw.newLine();
                 }
