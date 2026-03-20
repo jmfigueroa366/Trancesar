@@ -72,10 +72,10 @@ public class PasajeroDAO {
                             pasajero = new PasajeroRegular (Descuento, id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroRegular(Descuento, id, nombre, fechaNacimiento);
+                            pasajero = new PasajeroEstudiante(Descuento, id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroRegular(Descuento, id, nombre, fechaNacimiento);
+                            pasajero = new PasajeroAdultoMayor(Descuento, id, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;
@@ -110,10 +110,10 @@ public class PasajeroDAO {
                             pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
+                            pasajero = new PasajeroEstudiante(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
+                            pasajero = new PasajeroAdultoMayor(Descuento, tipo, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;
