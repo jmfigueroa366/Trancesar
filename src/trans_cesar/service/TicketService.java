@@ -52,6 +52,18 @@ public class TicketService {
         if (vehiculo ==  null) {
             throw new IllegalArgumentException("No existe vehiculo con este placa");
         }
+                
+        //Validar maximo 3 tickets por día 
+        int contador = 0;
+        LocalDate hoy = LocalDate.now();
+        for (Ticket t : ticketDAO.listarTodos()){
+            if (t.getPasajero().getId().equals(pasajero.getId()) && t.getFechaCompra().equals(hoy)) {
+                contador++;
+            }
+        }
+        if (contador >= 3) {
+            throw new Exception ("El pasajero no puede tener más de 3 tickets por día. ID: " + pasajero.getId());
+        }
         
         
         
