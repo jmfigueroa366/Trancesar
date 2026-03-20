@@ -65,7 +65,16 @@ public class TicketService {
             throw new Exception ("El pasajero no puede tener más de 3 tickets por día. ID: " + pasajero.getId());
         }
         
-        
+        //Validar que el vehiculo tenga cupo para un nuevo pasajero
+        int cupo = 0;
+        for (Ticket t : ticketDAO.listarTodos()) {
+            if (t.getVehiculo().getPlaca().equals (vehiculo.getPlaca()) && t.getFechaCompra().equals(hoy)) {
+                cupo++;
+            }
+        }
+        if (cupo >= vehiculo.getCapacidad()) {
+            throw new Exception ("El vehiculo no tiene cupo. Placa: " + vehiculo.getPlaca());
+        }
         
         Ticket ticket = new Ticket ();
         ticketDAO.guardar(ticket);
