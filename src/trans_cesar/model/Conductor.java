@@ -14,7 +14,7 @@ public class Conductor extends Persona {
     private int numeroLicencia;
     private String categoriaLicencia;
 
-    public Conductor(int numeroLicencia, String categoriaLicencia, int id, String nombre, LocalDate fechaNacimiento) {
+    public Conductor(int numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) {
         super(id, nombre, fechaNacimiento);
         this.numeroLicencia = numeroLicencia;
         this.categoriaLicencia = categoriaLicencia;

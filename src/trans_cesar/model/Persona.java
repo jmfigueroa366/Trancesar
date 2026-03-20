@@ -10,21 +10,21 @@ import java.time.LocalDate;
  * @author ANDREA CAROLINA
  */
 public abstract class Persona implements Imprimible {
-    private int id;
+    private String id;
     private String nombre;
     private LocalDate fechaNacimiento;
 
-    public Persona(int id, String nombre, LocalDate fechaNacimiento) {
+    public Persona(String id, String nombre, LocalDate fechaNacimiento) {
         this.id = id;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

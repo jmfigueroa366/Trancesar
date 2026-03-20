@@ -12,8 +12,8 @@ import java.time.Period;
  */
 public class PasajeroRegular extends Pasajero {
 
-    public PasajeroRegular(int id, String nombre, LocalDate fechaNacimiento, double Descuento) {
-        super(id, nombre, fechaNacimiento, 0.0);
+    public PasajeroRegular(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
+        super(0.0, id, nombre, fechaNacimiento);
     }
     
     @Override

@@ -11,10 +11,9 @@ import java.time.Period;
  * @author ANDREA CAROLINA
  */
 public class PasajeroAdultoMayor extends Pasajero {
-    
-    
-        public PasajeroAdultoMayor(int id, String nombre, LocalDate fechaNacimiento, double Descuento) {
-        super(id, nombre, fechaNacimiento, 0.30);
+
+    public PasajeroAdultoMayor(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
+        super(0.30, id, nombre, fechaNacimiento);
     }
     
     @Override

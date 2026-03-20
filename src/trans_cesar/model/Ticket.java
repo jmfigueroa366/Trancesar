@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * @author ANDREA CAROLINA
  */
 public class Ticket implements Imprimible, Calculable {
-    private int NumeroTicket;
+    private String NumeroTicket;
     private LocalDate fechaCompra;
     private String OrigenCiudad;
     private String DestinoCiudad;
@@ -19,7 +19,7 @@ public class Ticket implements Imprimible, Calculable {
     private Pasajero pasajero;
     private Vehiculo vehiculo;
 
-    public Ticket(int NumeroTicket, LocalDate fechaCompra, String OrigenCiudad, String DestinoCiudad, double PrecioFinal, Pasajero pasajero, Vehiculo vehiculo) {
+    public Ticket(String NumeroTicket, LocalDate fechaCompra, String OrigenCiudad, String DestinoCiudad, double PrecioFinal, Pasajero pasajero, Vehiculo vehiculo) {
         this.NumeroTicket = NumeroTicket;
         this.fechaCompra = fechaCompra;
         this.OrigenCiudad = OrigenCiudad;
@@ -29,11 +29,11 @@ public class Ticket implements Imprimible, Calculable {
         this.vehiculo = vehiculo;
     }
 
-    public int getNumeroTicket() {
+    public String getNumeroTicket() {
         return NumeroTicket;
     }
 
-    public void setNumeroTicket(int NumeroTicket) {
+    public void setNumeroTicket(String NumeroTicket) {
         this.NumeroTicket = NumeroTicket;
     }
 
