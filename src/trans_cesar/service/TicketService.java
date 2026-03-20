@@ -76,12 +76,33 @@ public class TicketService {
             throw new Exception ("El vehiculo no tiene cupo. Placa: " + vehiculo.getPlaca());
         }
         
-        Ticket ticket = new Ticket ();
+        //Si es festivo se le adiciona 20% al precio del tickets
+        //Primero se realizan los recargos a la tarifa
+        double tarifaFestivo = tarifa;
+        if (festivo(fechaCompra)) {
+            float tarifaFestivo = tarifa + (tarifa * 0.20);
+        }
+        
+        //Luego, se aplica el descuento según el tipo de pasajero
+        double Descuento = pasajero.calcularDescuento();
+        double precioFinal = tarifaFestivo - (tarifaFestivo * Descuento);
+        
+        Ticket ticket = new Ticket (NumeroTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, pasajero, cupo);
+        //Sobreescribir en el precio final
+        System.out.println("Precio Final del Ticket: $" + PrecioFinal);
         ticketDAO.guardar(ticket);
         System.out.println("Ticket registrado correctamente");
     }
     
-     //Busca un pasajero por ID.
+    //Metodo auxiliar para dias festivos en el calendario 
+    private boolean Festivo (LocalDate fecha) {
+        if (fecha.getDayOfWeek().getValue() == 7) {
+            return true;
+        }
+        return false;
+    }
+    
+     //Busca un tickte por numero.
     public Ticket BuscarNumeroTicket(String NumeroTicket) {
         Ticket ticket = ticketDAO.BuscarNumeroTicket(NumeroTicket);
         if (ticket == null) {
