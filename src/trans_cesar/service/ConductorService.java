@@ -41,8 +41,8 @@ public class ConductorService {
         if (fechaNacimiento == null) {
              throw new IllegalArgumentException("La fecha de nacimiento no puede estar vacio");
         }
-        if (numeroLicencia <= 0) {
-            throw new IllegalArgumentException("El numero de licencia debe ser valido");
+        if (numeroLicencia == null) {
+            throw new IllegalArgumentException("El numero de licencia no puede estar vacio");
         }
         if (categoriaLicencia == null || categoriaLicencia.isEmpty()) {
             throw new IllegalArgumentException("La categoria de licencia no puede estar vacio");
@@ -87,14 +87,14 @@ public class ConductorService {
     }
     
     //Validar que el conductor cumple con todos los requisitos para que se le pueda asignar un vehiculo
-    public void conductorParaVehiculo (id) throw Exception {
+    public void conductorParaVehiculo(String id) throws Exception {
         Conductor conductor = conductorDAO.BuscarId(id);
         
         if (conductor == null){
-            throw new IllegalArgumentException("No existe un conductor con ese ID);
+            throw new IllegalArgumentException("No existe un conductor con ese ID");
         }
         if (!categoriasValidas.contains(conductor.getCategoriaLicencia())){
-            throw new IllegalArgumentException("El codigo tiene una categoria de licencia invalida);
+            throw new IllegalArgumentException("El codigo tiene una categoria de licencia invalida");
         }
     }
 }
