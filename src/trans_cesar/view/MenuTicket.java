@@ -60,17 +60,11 @@ public class MenuTicket {
                 System.out.println("|  Numero de Ticket: ");
                 String NumTicket = leer.readLine();
                 
-                System.out.println("|  Fecha de compra: ");
-                LocalDate fechaCompra = LocalDate.parse(leer.readLine());
-                
                 System.out.println("|  Ciudad de Origen:  ");
                 String OrigenCiudad = leer.readLine();
                 
                 System.out.println("|  Ciudad de Destino: ");
                 String DestinoCiudad = leer.readLine();
-                
-                System.out.println("|  Precio Final del ticket: ");
-                double PrecioFinal = Double.parseDouble(leer.readLine());
                 
                 System.out.println("| Numero de identidad del pasajero: ");
                 String IdP = leer.readLine();
@@ -78,7 +72,7 @@ public class MenuTicket {
                 System.out.println("| Placa del vehiculo: ");
                 String PlacaVehiculo = leer.readLine();
                 
-                ts.validarRegistro(NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, PlacaVehiculo);
+                ts.validarRegistro(NumTicket, OrigenCiudad, DestinoCiudad, IdP, PlacaVehiculo);
                 
                 break;
                 
@@ -104,7 +98,7 @@ public class MenuTicket {
                         System.out.println("|  Ciudad de Destino:                " + t.getDestinoCiudad());
                         System.out.println("|  Precio Final del ticket:          " + t.getPrecioFinal());
                         System.out.println("|  Numero de identidad del pasajero: " + t.getPasajero().getId());
-                        System.out.println("|  Placa del vehiculo:               " + t.getVehiculo().getPlaca);
+                        System.out.println("|  Placa del vehiculo:               " + t.getVehiculo().getPlaca());
                         System.out.println("==============================");
 
                     
@@ -129,9 +123,9 @@ public class MenuTicket {
                         System.out.println("|  Fecha de compra:                  " + tl.getFechaCompra());
                         System.out.println("|  Ciudad de Origen:                 " + tl.getOrigenCiudad());
                         System.out.println("|  Ciudad de Destino:                 " + tl.getDestinoCiudad());
-                        System.out.println("|  Precio Final del ticket:          " + tl.getFechaCompra());
+                        System.out.println("|  Precio Final del ticket:          " + tl.getPrecioFinal());
                         System.out.println("|  Numero de identidad del pasajero: " + tl.getPasajero().getId());
-                        System.out.println("|  Placa del vehiculo:               " + tl.getVehiculo().getPlaca);
+                        System.out.println("|  Placa del vehiculo:               " + tl.getVehiculo().getPlaca());
                         System.out.println("===========================");
                     }
                                                                         //
