@@ -8,7 +8,7 @@ package MODEL;
  *
  * @author alvar
  */
-public class Reservas {
+public class Reserva {
     
     private String codigo;
     private Pasajero pasajero;
@@ -17,10 +17,10 @@ public class Reservas {
     private String fecha_reserva;
     private boolean activo;
 
-    public Reservas() {
+    public Reserva() {
     }
 
-    public Reservas(String codigo, Pasajero pasajero, Vehiculo vehiculo, String fecha_creacion, String fecha_reserva, boolean activo) {
+    public Reserva(String codigo, Pasajero pasajero, Vehiculo vehiculo, String fecha_creacion, String fecha_reserva, boolean activo) {
         this.codigo = codigo;
         this.pasajero = pasajero;
         this.vehiculo = vehiculo;
