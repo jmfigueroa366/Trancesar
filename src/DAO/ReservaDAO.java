@@ -179,5 +179,40 @@ public class ReservaDAO {
         
       return encontrado;
     }
+      
+    public Reserva buscarCodigo(String codigo){
         
+        try (BufferedReader br = new BufferedReader(new FileReader(RutaArchivos.Reserva))){
+            
+            String linea;
+            
+            while ((linea=br.readLine()) !=null ) {                
+                
+                if (linea.trim().isBlank()) continue ;
+                
+                String[] d = linea.split(";");
+                
+                if (d.length<12) continue;
+                
+                if (d[0].equals(codigo)) {
+                    
+                    return new Reserva(
+                            
+                            d[0],
+                            crearPasajero(d[6], d[3], d[4], LocalDate.parse(d[5])),
+                            crearVehiculo(d[10], d[7], Float.parseFloat(d[8]), Integer.parseInt(d[9])),
+                            d[1], d[2],
+                            Boolean.parseBoolean(d[11])
+                            
+                    );
+                    
+                }
+                
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error al buscar el codigo " + e);
+        }
+        return null;
+    }
    }
