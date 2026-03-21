@@ -110,5 +110,35 @@ public class ReservaDAO {
         return v;
         
     }
+    
+    public List<Reserva> listarReservas() throws IOException{
+        
+        List<Reserva> lista = new ArrayList<>();
+        
+         try (BufferedReader br = new BufferedReader(new FileReader(RutaArchivos.Reserva))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.trim().isEmpty()) continue;
+                String[] datos = linea.split(";");
+                if (datos.length < 12) continue;
+                
+                lista.add(new Reserva(
+                
+                datos[0], 
+                        
+                crearPasajero(datos[6], datos[3], datos[4], LocalDate.parse(datos[5])),
+                        
+                crearVehiculo(datos[10], datos[7], Float.parseFloat(datos[8]), Integer.parseInt(datos[9])),
+                        
+                datos[1],datos[2],
+                        
+                Boolean.parseBoolean(datos[11])
+                        
+                ));
+                
+            }
+        }
+        return reservas;
+    }
         
    }
