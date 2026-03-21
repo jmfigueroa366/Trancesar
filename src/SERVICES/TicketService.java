@@ -123,11 +123,13 @@ public class TicketService {
             LocalDate.of(2026, 6, 29),
             LocalDate.of(2026, 7, 20),
             LocalDate.of(2026, 8, 17));
+            return true;
         }
         //Jueves festivos configurados
         if (fecha.getDayOfWeek().getValue() == 4) {
             List<LocalDate> juevesFestivos = List.of(
             LocalDate.of(2026, 4, 2) );
+            return true;
         }
         //Viernes festivos configurados
         if (fecha.getDayOfWeek().getValue() == 5) {
@@ -135,6 +137,7 @@ public class TicketService {
             LocalDate.of(2026, 4, 3), 
             LocalDate.of(2026, 5, 1),
             LocalDate.of(2026, 8, 7));
+            return true;
         }
         return false;
     }
