@@ -21,14 +21,16 @@ import java.util.List;
 public class TicketService {
     
     private TicketDAO ticketDAO;
+    private PasajeroDAO pasajeroDAO;
+    private VehiculoDAO vehiculoDAO;
 
-    public TicketService(TicketDAO ticketDAO) {
+    public TicketService(TicketDAO ticketDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO) {
         this.ticketDAO = ticketDAO;
+        this.pasajeroDAO = pasajeroDAO;
+        this.vehiculoDAO = vehiculoDAO;
     }
-     private PasajeroDAO pasajeroDAO; //Verificar 
-     private VehiculoDAO vehiculoDAO;
     
-    public void validarRegistro (String NumeroTicket, LocalDate fechaCompra, String OrigenCiudad, String DestinoCiudad, double PrecioFinal, String idpasajero, String placaVehiculo)
+    public void validarRegistro (String NumeroTicket, String OrigenCiudad, String DestinoCiudad, String idpasajero, String placaVehiculo)
             throws Exception {
         // Inicialmente s verifica que no exista diplicacion de Numero de Ticket
         if (ticketDAO.BuscarNumeroTicket(NumeroTicket) !=null) {
@@ -53,10 +55,11 @@ public class TicketService {
         if (vehiculo ==  null) {
             throw new IllegalArgumentException("No existe vehiculo con este placa");
         }
-                
+        
+        LocalDate hoy = LocalDate.now();
+        
         //Validar maximo 3 tickets por día 
         int contador = 0;
-        LocalDate hoy = LocalDate.now();
         for (Ticket t : ticketDAO.listarTodos()){
             if (t.getPasajero().getId().equals(pasajero.getId()) && t.getFechaCompra().equals(hoy)) {
                 contador++;
@@ -79,24 +82,24 @@ public class TicketService {
         
         //Si es festivo se le adiciona 20% al precio del tickets
         //Primero se realizan los recargos a la tarifa
-        double tarifaFestivo = tarifa;
-        if (festivo(fechaCompra)) {
-            float tarifaFestivo = tarifa + (tarifa * 0.20);
+        double tarifaFestivo = vehiculo.getTarifa();
+        if (festivo(hoy)) {
+            tarifa += tarifa * 0.20;
         }
         
         //Luego, se aplica el descuento según el tipo de pasajero
         double Descuento = pasajero.calcularDescuento();
         double precioFinal = tarifaFestivo - (tarifaFestivo * Descuento);
         
-        Ticket ticket = new Ticket (NumeroTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, pasajero, cupo);
+        Ticket ticket = new Ticket (NumeroTicket, hoy, OrigenCiudad, DestinoCiudad, precioFinal, pasajero, cupo);
         //Sobreescribir en el precio final
-        System.out.println("Precio Final del Ticket: $" + PrecioFinal);
         ticketDAO.guardar(ticket);
+        System.out.println("Precio Final del Ticket: $" + precioFinal);
         System.out.println("Ticket registrado correctamente");
     }
     
     //Metodo auxiliar para dias festivos en el calendario 
-    private boolean Festivo (LocalDate fecha) {
+    private boolean festivo (LocalDate fecha) {
         if (fecha.getDayOfWeek().getValue() == 7) {
             return true;
         }
@@ -126,13 +129,13 @@ public class TicketService {
         return false;
     }
     
-     //Busca un tickte por numero.
+     //Busca un ticket por numero.
     public Ticket BuscarNumeroTicket(String NumeroTicket) {
-        Ticket ticket = ticketDAO.BuscarNumeroTicket(NumeroTicket);
-        if (ticket == null) {
+        Ticket t = ticketDAO.BuscarNumeroTicket(NumeroTicket);
+        if (t == null) {
             throw new IllegalArgumentException("No se encontró un ticket con este número: " + NumeroTicket);
         }
-        return ticket;
+        return t;
     }
    
     // Retorna la lista de todos los ticket registrados.
@@ -143,6 +146,19 @@ public class TicketService {
         }
         return lista;
     }
+    
+    //Lista de tickets vendidas por fecha especifica
+    public List<Ticket> consultarPorFecha(LocalDate fecha) {
+        List<Ticket> resultados = ticketDAO.listarTodos();
+        
+        for (Ticket t: ticketDAO.listarTodos()) {
+            if (t.getFechaCompra().equals(fecha)){
+                resultados.add(t);
+            }
+        }
+        return resultados;
+    }
+    
     
     // Elimina un ticket por su numero.
     public void eliminarTicket(String NumeroTicket) {
