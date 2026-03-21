@@ -110,4 +110,32 @@ public class ReservaService {
     reservaDAO.cancelarRerserva(codigo);
     System.out.println("Reserva cancelada correctamente");
 }
+    //listar de reservas activas
+    public List<Reserva> listarActivas() throws Exception {
+        
+        List<Reserva> lista = reservaDAO.listarReservas();
+        List<Reserva> activas = new ArrayList<>();
+        
+        for (Reserva r : lista) {
+            if (r.isActivo()) {
+                activas.add(r);
+            }
+        }
+        return activas;
     }
+    
+    //listar el historial de reservas por pasajero
+    public List<Reserva> historialPorPasajero(String id) throws Exception {
+        
+        List<Reserva> lista = reservaDAO.listarReservas();
+        List<Reserva> historial = new ArrayList<>();
+        
+        for (Reserva r : lista) {
+            if (r.getPasajero().getId().equals(id)) {
+                historial.add(r);
+            }
+        }
+        return historial;
+    }
+    
+}
