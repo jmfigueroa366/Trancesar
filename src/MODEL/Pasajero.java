@@ -14,6 +14,11 @@ import java.time.LocalDate;
 public abstract class Pasajero extends Persona {
     final double Descuento;
 
+    public Pasajero() {
+        super(null, null, null);
+        this.Descuento = 0;
+    }
+    
     public Pasajero(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
         super(id, nombre, fechaNacimiento);
         this.Descuento = Descuento;
