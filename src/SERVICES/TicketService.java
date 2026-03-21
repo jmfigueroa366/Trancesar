@@ -8,14 +8,15 @@ import DAO.PasajeroDAO;
 import MODEL.PasajeroRegular;
 import MODEL.PasajeroEstudiante;
 import MODEL.PasajeroAdultoMayor;
-import DAO.ConductorDAO;
+import DAO.VehiculoDAO;
+import MODEL.Bus;
+import MODEL.Buseta;
+import MODEL.MicroBus;
 import MODEL.Ticket;
 import MODEL.Pasajero;
-import trans_cesar.model.Vehiculo;
+import MODEL.Vehiculo;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 /**
  *
@@ -27,11 +28,16 @@ public class TicketService {
     private PasajeroDAO pasajeroDAO;
     private VehiculoDAO vehiculoDAO;
 
+    public TicketService() {
+        
+    }
+    
     public TicketService(TicketDAO ticketDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO) {
         this.ticketDAO = ticketDAO;
         this.pasajeroDAO = pasajeroDAO;
         this.vehiculoDAO = vehiculoDAO;
     }
+
     
     public void validarRegistro (String NumeroTicket, String OrigenCiudad, String DestinoCiudad, String idpasajero, String placaVehiculo)
             throws Exception {
@@ -85,16 +91,17 @@ public class TicketService {
         
         //Si es festivo se le adiciona 20% al precio del tickets
         //Primero se realizan los recargos a la tarifa
-        double tarifaFestivo = vehiculo.getTarifa();
+        
+        float tarifaFestivo = vehiculo.getTarifa();
         if (festivo(hoy)) {
-            tarifa += tarifa * 0.20;
+            tarifaFestivo += tarifaFestivo * 0.20;
         }
         
         //Luego, se aplica el descuento según el tipo de pasajero
         double Descuento = pasajero.calcularDescuento();
         double precioFinal = tarifaFestivo - (tarifaFestivo * Descuento);
         
-        Ticket ticket = new Ticket (NumeroTicket, hoy, OrigenCiudad, DestinoCiudad, precioFinal, pasajero, cupo);
+        Ticket ticket = new Ticket (NumeroTicket, hoy, OrigenCiudad, DestinoCiudad, precioFinal, pasajero, vehiculo);
         //Sobreescribir en el precio final
         ticketDAO.guardar(ticket);
         System.out.println("Precio Final del Ticket: $" + precioFinal);
@@ -167,7 +174,15 @@ public class TicketService {
         List<Ticket> resultado = new ArrayList<>();
         
         for (Ticket t: ticketDAO.listarTodos()) {
-            if (t.getVehiculo().getTipo.equalsIgnoreCase(tipo)){
+            if (t.getVehiculo() instanceof Bus) {
+               resultado.add(t);
+            }
+            
+            if (t.getVehiculo() instanceof MicroBus) {
+                resultado.add(t);
+            }
+            
+            if (t.getVehiculo() instanceof Buseta) {
                 resultado.add(t);
             }
         }

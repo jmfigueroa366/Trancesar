@@ -3,13 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package VIEW;
-import DAO.TicketDAO;
 import MODEL.Ticket;
 import SERVICES.TicketService;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
 import java.util.List;
 /**
  *

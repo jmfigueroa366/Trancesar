@@ -3,11 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
-import DAO.PasajeroDAO;
 import MODEL.Ticket;
-import trans_cesar.util.RutaArchivos;
 import MODEL.Pasajero;
-import trans_cesar.model.Vehiculo;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedWriter; 
@@ -16,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter; 
 import java.io.IOException;
 import java.time.LocalDate;
+import trancesar.util.RutaArchivos;
 
 /**
  *
