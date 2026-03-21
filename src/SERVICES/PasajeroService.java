@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package trans_cesar.service;
+package SERVICES;
 
-import trans_cesar.dao.PasajeroDAO;
-import trans_cesar.model.Pasajero;
-import trans_cesar.model.PasajeroRegular;
-import trans_cesar.model.PasajeroEstudiante;
-import trans_cesar.model.PasajeroAdultoMayor;
+import DAO.PasajeroDAO;
+import MODEL.Pasajero;
+import MODEL.PasajeroRegular;
+import MODEL.PasajeroEstudiante;
+import MODEL.PasajeroAdultoMayor;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;

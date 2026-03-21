@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package trans_cesar.dao;
+package DAO;
 
-import trans_cesar.model.Pasajero;
-import trans_cesar.model.PasajeroRegular;
-import trans_cesar.model.PasajeroEstudiante;
-import trans_cesar.model.PasajeroAdultoMayor;
-import trans_cesar.util.RutaArchivos;
+import MODEL.Pasajero;
+import MODEL.PasajeroRegular;
+import MODEL.PasajeroEstudiante;
+import MODEL.PasajeroAdultoMayor;
+import trancesar.util.RutaArchivos;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedWriter; 

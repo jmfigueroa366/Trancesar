@@ -1,4 +1,6 @@
-package trans_cesar;
+package VIEW;
+
+import VIEW.view;
 
 public class Trans_cesar {
 

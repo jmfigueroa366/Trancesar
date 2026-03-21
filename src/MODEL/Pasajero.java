@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package trans_cesar.model;
+package MODEL;
 
+import MODEL.Persona;
 import java.time.LocalDate;
 
 /**

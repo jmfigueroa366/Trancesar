@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package trans_cesar.view;
-import trans_cesar.dao.TicketDAO;
-import trans_cesar.model.Ticket;
-import trans_cesar.service.TicketService;
+package VIEW;
+import DAO.ConductorDAO;
+import MODEL.Conductor;
+import SERVICES.ConductorService;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -15,12 +15,12 @@ import java.util.List;
  *
  * @author ANDREA CAROLINA
  */
-public class MenuTicket {
-     public static void main(String[] args) throws IOException, Exception {
+public class MenuConductor {
+    public static void main(String[] args) throws IOException, Exception {
         
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         
-        TicketService ts = new TicketService();
+        ConductorService cs = new ConductorService();
         
         int opc = 0;
         
@@ -29,12 +29,12 @@ public class MenuTicket {
         String m = null; 
             
         System.out.println("==============================");
-        System.out.println("|       GESTIÓN DE TICKET          |");
+        System.out.println("|       GESTIÓN DE CONDUCTOR          |");
         System.out.println("==============================");
-        System.out.println("|  1. Registrar ticket             |");
-        System.out.println("|  2. Buscar ticket                |");
-        System.out.println("|  3. Listar ticket                |");
-        System.out.println("|  4. Eliminar ticket              |");
+        System.out.println("|  1. Registrar conductor             |");
+        System.out.println("|  2. Buscar conductor                |");
+        System.out.println("|  3. Listar conductor                |");
+        System.out.println("|  4. Eliminar conductor              |");
         System.out.println("|  5. Salir                          |");
         System.out.println("==============================");
         System.out.print("   Seleccione una opción: ");
@@ -49,37 +49,37 @@ public class MenuTicket {
                 opc=0;
             }
         
-        switch (opc) { 
+        switch (opc) {
             
             case 1:
                 //ingreso de registros
                 System.out.println("==============================");
-                System.out.println("|       REGISTRAR TICKET           |");
+                System.out.println("|       REGISTRAR CONDUCTOR           |");
                 System.out.println("==============================");
                 
-                System.out.println("|  Numero de Ticket: ");
-                String NumTicket = leer.readLine();
+                System.out.println("|  Numero de identidad: ");
+                String id = leer.readLine();
                 
-                System.out.println("|  Ciudad de Origen:  ");
-                String OrigenCiudad = leer.readLine();
+                System.out.println("|  Nombre: ");
+                String nombre = leer.readLine();
                 
-                System.out.println("|  Ciudad de Destino: ");
-                String DestinoCiudad = leer.readLine();
+                System.out.println("|  Fecha de Nacimiento (YYYY/MM/DD):  ");
+                LocalDate fechaNacimiento = LocalDate.parse(leer.readLine());
                 
-                System.out.println("| Numero de identidad del pasajero: ");
-                String IdP = leer.readLine();
+                System.out.println("|  Numero de Licencia: ");
+                String numeroLicencia = leer.readLine();
                 
-                System.out.println("| Placa del vehiculo: ");
-                String PlacaVehiculo = leer.readLine();
+                System.out.println("|  Categoria de Licencia: ");
+                String categoriaLicencia = leer.readLine();
                 
-                ts.validarRegistro(NumTicket, OrigenCiudad, DestinoCiudad, IdP, PlacaVehiculo);
+                cs.validarRegistro(numeroLicencia, categoriaLicencia, id, nombre, fechaNacimiento);
                 
                 break;
                 
             case 2:
                 
                 System.out.println("==============================");
-                System.out.println("|         BUSCAR TICKET            |");
+                System.out.println("|         BUSCAR CONDUCTOR         |");
                 System.out.println("==============================");
                 System.out.print("|  Ingrese el numero de identidad: ");
                 m = leer.readLine();
@@ -87,18 +87,16 @@ public class MenuTicket {
                 
                 try {
                     
-                    Ticket t = ts.BuscarNumeroTicket(m);
+                    Conductor c = cs.buscarConductor(m);
                     
-                        System.out.println("╔=============================");
-                        System.out.println("|       TICKET ENCONTRADO          |");
                         System.out.println("==============================");
-                        System.out.println("|  Numero de Ticket:                 " + t.getNumeroTicket());
-                        System.out.println("|  Fecha de compra:                  " + t.getFechaCompra());
-                        System.out.println("|  Ciudad de Origen:                 " + t.getOrigenCiudad());
-                        System.out.println("|  Ciudad de Destino:                " + t.getDestinoCiudad());
-                        System.out.println("|  Precio Final del ticket:          " + t.getPrecioFinal());
-                        System.out.println("|  Numero de identidad del pasajero: " + t.getPasajero().getId());
-                        System.out.println("|  Placa del vehiculo:               " + t.getVehiculo().getPlaca());
+                        System.out.println("|       CONDUCTOR ENCONTRADO    |");
+                        System.out.println("==============================");
+                        System.out.println("|  Num. Identidad:          " + c.getId());
+                        System.out.println("|  Nombre:                 " + c.getNombre());
+                        System.out.println("|  Fecha de Nacimiento:    " + c.getFechaNacimiento());
+                        System.out.println("|  Numero de Licencia:     " + c.getNumeroLicencia());
+                        System.out.println("|  Categoria de Licencia:  " + c.getCategoriaLicencia());
                         System.out.println("==============================");
 
                     
@@ -112,20 +110,18 @@ public class MenuTicket {
                 
                 try {
                     
-                    List <Ticket> lista = ts.listarTicket();
+                    List <Conductor> lista = cs.listarConductor();
                     
                     System.out.println("==============================");
-                    System.out.println("|         LISTA DE TICKET         |");
+                    System.out.println("|         LISTA DE CONDUCTORES        |");
                     System.out.println("==============================");
                     
-                    for (Ticket tl : lista) {
-                        System.out.println("|  Numero de Ticket:                 " + tl.getNumeroTicket());
-                        System.out.println("|  Fecha de compra:                  " + tl.getFechaCompra());
-                        System.out.println("|  Ciudad de Origen:                 " + tl.getOrigenCiudad());
-                        System.out.println("|  Ciudad de Destino:                 " + tl.getDestinoCiudad());
-                        System.out.println("|  Precio Final del ticket:          " + tl.getPrecioFinal());
-                        System.out.println("|  Numero de identidad del pasajero: " + tl.getPasajero().getId());
-                        System.out.println("|  Placa del vehiculo:               " + tl.getVehiculo().getPlaca());
+                    for (Conductor cl : lista) {
+                        System.out.println("|  Numero de identidad:    " + cl.getId());
+                        System.out.println("|  Nombre:                 " + cl.getNombre());
+                        System.out.println("|  Fecha de Nacimiento:    " + cl.getFechaNacimiento());
+                        System.out.println("|  Numero de Licencia:     " + cl.getNumeroLicencia());
+                        System.out.println("|  Categoria de Licencia:  " + cl.getCategoriaLicencia());
                         System.out.println("===========================");
                     }
                                                                         //
@@ -140,15 +136,15 @@ public class MenuTicket {
             case 4:
                 
                         System.out.println("==============================");
-                        System.out.println("|        ELIMINAR TICKET            |");
+                        System.out.println("|        ELIMINAR CONDUCTOR            |");
                         System.out.println("==============================");
-                        System.out.print("|  Ingrese la numero de identidad: ");
+                        System.out.print("|  Ingrese el numero de identidad: ");
                         m = leer.readLine();
                         System.out.println("==============================");
                         
                         try {
-                            ts.eliminarTicket(m);
-                            System.out.println("TICKET ELIMINADO");
+                            cs.eliminarConductor(m);
+                            System.out.println("CONDUCTOR ELIMINADO");
                         } catch (Exception e) {
                             System.out.println("NO EXISTE ESTE REGISTRO ");
                         }

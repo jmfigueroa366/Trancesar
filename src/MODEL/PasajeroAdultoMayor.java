@@ -2,18 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package trans_cesar.model;
+package MODEL;
 
+import MODEL.Pasajero;
 import java.time.LocalDate;
 import java.time.Period;
 /**
  *
  * @author ANDREA CAROLINA
  */
-public class PasajeroRegular extends Pasajero {
+public class PasajeroAdultoMayor extends Pasajero {
 
-    public PasajeroRegular(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
-        super(0.0, id, nombre, fechaNacimiento);
+    public PasajeroAdultoMayor(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
+        super(0.30, id, nombre, fechaNacimiento);
     }
     
     @Override
@@ -24,10 +25,10 @@ public class PasajeroRegular extends Pasajero {
     @Override
     public void imprimirDetalle() {
          int edad = Period.between(getFechaNacimiento(), LocalDate.now()).getYears();
-         System.out.println("PASAJERO REGULAR");
+         System.out.println("PASAJERO ADULTO MAYOR");
          System.out.println("Cedula: " + getId());
          System.out.println("Nombre: " + getNombre());
          System.out.println("Edad: " + edad + "años");
          System.out.println("Descuento: " + (calcularDescuento()*100) + "%");
-    }  
+    } 
 }
