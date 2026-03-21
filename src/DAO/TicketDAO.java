@@ -5,6 +5,7 @@
 package DAO;
 import MODEL.Ticket;
 import MODEL.Pasajero;
+import MODEL.Vehiculo;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedWriter; 
@@ -42,6 +43,7 @@ public class TicketDAO {
         }
     }
     PasajeroDAO p = new PasajeroDAO();
+    VehiculoDAO vd= new VehiculoDAO();
     
     public Ticket BuscarNumeroTicket (String NumeroTicket) {
         try (BufferedReader br = new BufferedReader (
@@ -58,8 +60,10 @@ public class TicketDAO {
                         double PrecioFinal = Double.parseDouble(datos[4]);
                         String idPasajero = datos[5];
                         Pasajero IdP = p.BuscarId(idPasajero);
-                        float PlacaVehiculo = Float.parseFloat(datos[6]);
-                        return new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, PlacaVehiculo);
+                        String PlacaVehiculo = datos[6];
+                        Vehiculo pv = vd.buscarPorPlaca(PlacaVehiculo);
+                        
+                        return new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, pv);
                     }
                 }
             } catch (IOException e) {
@@ -83,9 +87,10 @@ public class TicketDAO {
                     double PrecioFinal = Double.parseDouble(datos[4]);
                     String idPasajero = datos[5];
                     Pasajero IdP = p.BuscarId(idPasajero);
-                    float PlacaVehiculo = Float.parseFloat(datos[6]);
+                    String PlacaVehiculo = datos[6];
+                    Vehiculo pv = vd.buscarPorPlaca(PlacaVehiculo);
                   
-                    lista.add( new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, PlacaVehiculo));
+                    lista.add( new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, pv));
                     }
             }
         } catch (IOException e) {
