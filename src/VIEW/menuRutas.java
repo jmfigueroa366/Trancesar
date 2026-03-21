@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class menuRutas {
 
-    public menuRutas() throws IOException, Exception {
+    public static void main(String[] args) throws IOException, Exception{
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         rutaServices rs = new rutaServices();
         
@@ -152,6 +152,6 @@ public class menuRutas {
             }
             
         }
-        
     }
-}
+   }
+
