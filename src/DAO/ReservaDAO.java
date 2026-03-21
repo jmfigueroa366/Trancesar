@@ -4,11 +4,16 @@
  */
 package DAO;
 
+import MODEL.Pasajero;
 import MODEL.Reserva;
+import MODEL.Vehiculo;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import trancesar.util.RutaArchivos;
 /**
  *
@@ -18,25 +23,33 @@ public class ReservaDAO {
     
     ArrayList<Reserva> reservas = new ArrayList<>();
     
-    public void guardarReserva(Reserva r){
-        
-        String ruta = RutaArchivos.Reserva;
-        
-        try (BufferedWriter bw = new BufferedWriter(
-                new FileWriter(ruta, true))) {
+   public void guardarReserva(Reserva r) {
+    try (BufferedWriter bw = new BufferedWriter(
+            new FileWriter(RutaArchivos.Reserva, true))) {
 
-                bw.write(
-                     r.getCodigo() + ";" +
-                     r.getFecha_creacion() + ";" +
-                     r.getFecha_reserva() + ";" +
-                     r.getPasajero() + ";" +
-                     r.getVehiculo().getPlaca());
-            bw.newLine();
-            
-        } catch (IOException e) {
-            System.out.println("Error al guardar vehiculo: " + e.getMessage());
-        }
+        Pasajero p = r.getPasajero();
+        Vehiculo v = r.getVehiculo();
+
+        bw.write(
+            r.getCodigo()          + ";" +
+            r.getFecha_creacion()  + ";" +
+            r.getFecha_reserva()   + ";" +
+            p.getId()              + ";" +   
+            p.getNombre()          + ";" + 
+            v.getPlaca()           + ";" +   
+            v.getTarifa()          + ";" +   
+            v.getCapacidad()       + ";" +   
+            r.isActivo()                     
+        );
+        bw.newLine();
+
+    } catch (IOException e) {
+        System.out.println("Error al guardar reserva: " + e.getMessage());
+    }
+}
+    
+    
         
     }
     
-}
+
