@@ -5,6 +5,9 @@
 package trans_cesar.service;
 import trans_cesar.dao.TicketDAO;
 import trans_cesar.dao.PasajeroDAO;
+import trans_cesar.model.PasajeroRegular;
+import trans_cesar.model.PasajeroEstudiante;
+import trans_cesar.model.PasajeroAdultoMayor;
 import trans_cesar.dao.ConductorDAO;
 import trans_cesar.model.Ticket;
 import trans_cesar.model.Pasajero;
@@ -149,7 +152,7 @@ public class TicketService {
     
     //Lista de tickets vendidas por fecha especifica
     public List<Ticket> consultarPorFecha(LocalDate fecha) {
-        List<Ticket> resultados = ticketDAO.listarTodos();
+        List<Ticket> resultados = new ArrayList<>();
         
         for (Ticket t: ticketDAO.listarTodos()) {
             if (t.getFechaCompra().equals(fecha)){
@@ -157,6 +160,18 @@ public class TicketService {
             }
         }
         return resultados;
+    }
+    
+    //Lista de tickets vendidas por tipo de vehiculo
+    public List<Ticket> consultarPorTipoVehiculo(int tipo) {
+        List<Ticket> resultado = new ArrayList<>();
+        
+        for (Ticket t: ticketDAO.listarTodos()) {
+            if (t.getVehiculo().getTipo.equalsIgnoreCase(tipo)){
+                resultado.add(t);
+            }
+        }
+        return resultado;
     }
     
     
