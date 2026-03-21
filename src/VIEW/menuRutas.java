@@ -9,6 +9,7 @@ import SERVICES.rutaServices;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  *
@@ -16,7 +17,7 @@ import java.io.InputStreamReader;
  */
 public class menuRutas {
 
-    public menuRutas() throws IOException {
+    public menuRutas() throws IOException, Exception {
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         rutaServices rs = new rutaServices();
         
@@ -115,6 +116,35 @@ public class menuRutas {
                     }
                     
                     break;
+                    
+                case 3:
+                    
+                    try{
+                    
+                    List<Ruta> lista = rs.listar();
+                    
+                    System.out.println("==============================");
+                    System.out.println("|         LISTA DE RUTAS             |");
+                    System.out.println("==============================");
+                    
+                    for (Ruta r : lista) {
+                        
+                        System.out.println("|  Código:   " + r.getCodigo());
+                        System.out.println("|  Origen:   " + r.getC_origen());
+                        System.out.println("|  Destino:  " + r.getC_destino());
+                        System.out.println("|  Distancia:" + r.getDistancia() + " km");
+                        System.out.println("|  Tiempo:   " + r.getTiempo() + " min");
+                        System.out.println("===========================");
+                        
+                    }
+                    
+                    System.out.println("==============================");
+                    
+                    break;
+                    
+                    }catch (Exception e) {
+                        System.out.println("Error de tipo: " + e.getMessage());
+                    }
                  
                 default:
                     System.out.println("INGRESE UNA OPCION DEL MENÚ");
