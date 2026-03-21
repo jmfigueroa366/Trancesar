@@ -4,7 +4,13 @@
  */
 package DAO;
 
+import MODEL.Bus;
+import MODEL.Buseta;
+import MODEL.MicroBus;
 import MODEL.Pasajero;
+import MODEL.PasajeroAdultoMayor;
+import MODEL.PasajeroEstudiante;
+import MODEL.PasajeroRegular;
 import MODEL.Reserva;
 import MODEL.Vehiculo;
 import java.io.BufferedReader;
@@ -12,6 +18,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import trancesar.util.RutaArchivos;
@@ -46,10 +53,62 @@ public class ReservaDAO {
     } catch (IOException e) {
         System.out.println("Error al guardar reserva: " + e.getMessage());
     }
-}
+   }
+   
+   private Pasajero crearPasajero(String tipo, String id, String nombre, LocalDate fechaNac){
+       
+       switch (tipo) {
+           case "PasajeroRegular":
+               
+               return new PasajeroRegular(0, id, nombre, fechaNac);
+               
+           case "PasajeroAdultoMayor":
+               
+               return new PasajeroAdultoMayor(0, id, nombre, fechaNac);
+               
+           case "PasajeroEstudiante":
+               
+               return new PasajeroEstudiante(0, id, nombre, fechaNac);
+               
+           default:
+               return null;
+       }
+       
+   }
     
-    
+    private Vehiculo crearVehiculo (String tipo, String placa, Float tarifa, int capacidad){
+        
+        Vehiculo v;
+        
+        switch (tipo) {
+            case "Bus":
+                
+                v=new Bus();
+                
+                break;
+             
+            case "Buseta":
+                
+                v=new Buseta();
+                
+                break;
+                
+            case "Microbus":
+            
+                v=new MicroBus();
+                
+                break;
+             
+            default:
+                return null;
+        }
+        
+        v.setPlaca(placa);
+        v.setTarifa(tarifa);
+        v.setCapacidad(capacidad);
+        
+        return v;
         
     }
-    
-
+        
+   }
