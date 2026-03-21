@@ -15,6 +15,7 @@ import MODEL.Reserva;
 import MODEL.Vehiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -139,6 +140,44 @@ public class ReservaDAO {
             }
         }
         return reservas;
+    }
+    
+    public boolean cancelarRerserva(String codigo) throws FileNotFoundException, IOException{
+        
+        List<String> lineas = new ArrayList<>();
+        
+        boolean encontrado = false;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(RutaArchivos.Reserva))) {
+        String linea;
+        while ((linea = br.readLine()) != null) {
+            if (linea.trim().isEmpty()) continue;
+                String[] datos = linea.split(";");
+                    if (datos[0].equals(codigo)) {
+                        encontrado = true; // esta línea se omite (se "elimina")
+                    } else {
+                    lineas.add(linea); // las demás se conservan
+                        }
+            }
+        } catch (IOException e) {
+          System.out.println("Error al leer reservas: " + e.getMessage());
+          return false;
+        }
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(RutaArchivos.Reserva, false))){
+            
+            for (String l : lineas) {
+                bw.write(l);
+                bw.newLine();
+            }
+            
+        } catch (Exception e) {
+            
+            System.out.println("Error en la eliminacion de reserva" + e);
+            return false;
+        } 
+        
+      return encontrado;
     }
         
    }
