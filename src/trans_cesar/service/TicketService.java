@@ -174,6 +174,24 @@ public class TicketService {
         return resultado;
     }
     
+    //Lista de tickets vendidas por tipo de pasajero
+    public List<Ticket> consultarPorTipoPasajero(String tipo) {
+        List<Ticket> resultados =  new ArrayList<>();
+        
+        for (Ticket t: ticketDAO.listarTodos()) {
+            if (tipo.equalsIgnoreCase("Pasajero Regular") && t.getPasajero() instanceof PasajeroRegular) {
+                resultados.add(t);
+            }
+            if (tipo.equalsIgnoreCase("Pasajero Estudiante") && t.getPasajero() instanceof PasajeroEstudiante) {
+                resultados.add(t);
+            }
+            if (tipo.equalsIgnoreCase("Pasajero Adulto Mayor") && t.getPasajero() instanceof PasajeroAdultoMayor) {
+                resultados.add(t);
+            }
+        }
+        return resultados;
+    }
+    
     
     // Elimina un ticket por su numero.
     public void eliminarTicket(String NumeroTicket) {
