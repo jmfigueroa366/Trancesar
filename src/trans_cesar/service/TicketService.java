@@ -10,6 +10,7 @@ import trans_cesar.model.Ticket;
 import trans_cesar.model.Pasajero;
 import trans_cesar.model.Vehiculo;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,6 +99,29 @@ public class TicketService {
     private boolean Festivo (LocalDate fecha) {
         if (fecha.getDayOfWeek().getValue() == 7) {
             return true;
+        }
+        //Lunes festivos configurados
+        if (fecha.getDayOfWeek().getValue() == 1) {
+            List<LocalDate> lunesFestivos = List.of(
+            LocalDate.of(2026, 3, 23), 
+            LocalDate.of(2026, 5, 18),
+            LocalDate.of(2026, 6, 8),
+            LocalDate.of(2026, 6, 15),
+            LocalDate.of(2026, 6, 29),
+            LocalDate.of(2026, 7, 20),
+            LocalDate.of(2026, 8, 17));
+        }
+        //Jueves festivos configurados
+        if (fecha.getDayOfWeek().getValue() == 4) {
+            List<LocalDate> juevesFestivos = List.of(
+            LocalDate.of(2026, 4, 2) );
+        }
+        //Viernes festivos configurados
+        if (fecha.getDayOfWeek().getValue() == 5) {
+            List<LocalDate> viernesFestivos = List.of(
+            LocalDate.of(2026, 4, 3), 
+            LocalDate.of(2026, 5, 1),
+            LocalDate.of(2026, 8, 7));
         }
         return false;
     }
