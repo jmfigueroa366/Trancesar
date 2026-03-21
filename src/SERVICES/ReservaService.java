@@ -65,4 +65,30 @@ public class ReservaService {
             }
         }
         
+        //Validar que el vehiculo tenga cupo para una nueva reserva contando los tickets vendidos
+        int cupo = 0;
+        
+        for (Ticket t : ticketDAO.listarTodos()) {
+            if (t.getVehiculo().getPlaca().equals(vehiculo.getPlaca()) && t.getFechaCompra().equals(fechaReservaDate)) {
+                cupo++;
+            }
+        }
+        
+        for (Reserva r: reservaDAO.listarReservas()) {
+            if (r.isActivo() && r.getVehiculo().getPlaca().equals(vehiculo.getPlaca()) && r.getFecha_reserva().equals(fechaReservaDate)) {
+                cupo++;
+            } 
+        }
+        if (cupo >= vehiculo.getCapacidad()) {
+            throw new Exception ("El vehiculo no tiene cupo para realizar la reserva. Placa: " + vehiculo.getPlaca());
+        }
+        
+        String fechaCreacion = LocalDate.now().toString();
+        
+        Reserva reserva = new Reserva (codigo, pasajero, vehiculo, fecha_reserva, fecha_reserva, true);
+        
+        reservaDAO.guardarReserva(reserva);
+        System.out.println("Reserva registrada exitosamente...");
+    }
+   
 }
