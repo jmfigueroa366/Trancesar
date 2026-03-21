@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package VIEW;
+
 import MODEL.Bus;
 import MODEL.Buseta;
 import MODEL.MicroBus;
@@ -15,218 +12,163 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 
-/**
- *
- * @author alvar
- */
 public class menuVehiculo {
-    
-    public static void main(String[] args) throws IOException, Exception {
-        
-        BufferedReader leer=new BufferedReader(new InputStreamReader(System.in));
-        
-        int opc = 0;
-        
-        while (opc !=5) {  
-            
-        String p=null;
-        
+
+    public void mostrarMenu() throws IOException, Exception {
+
+        BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         vehiculoServices vs = new vehiculoServices();
-        Vehiculo v = null;    
-            
-        System.out.println("==============================");
-        System.out.println("|       GESTIÓN DE VEHÍCULOS         |");
-        System.out.println("==============================");
-        System.out.println("|  1. Registrar vehículo             |");
-        System.out.println("|  2. Buscar vehículo                |");
-        System.out.println("|  3. Eliminar vehículo              |");
-        System.out.println("|  4. Listar vehículos           |    |");
-        System.out.println("|  5. Salir                          |");
-        System.out.println("==============================");
-        System.out.print("   Seleccione una opción: ");
-        
+
+        int opc = 0;
+
+        while (opc != 5) {
+
+            String p = null;
+            Vehiculo v = null;
+
+            System.out.println("==============================");
+            System.out.println("|   GESTIÓN DE VEHÍCULOS     |");
+            System.out.println("==============================");
+            System.out.println("|  1. Registrar vehículo     |");
+            System.out.println("|  2. Buscar vehículo        |");
+            System.out.println("|  3. Eliminar vehículo      |");
+            System.out.println("|  4. Listar vehículos       |");
+            System.out.println("|  5. Salir                  |");
+            System.out.println("==============================");
+            System.out.print("Seleccione una opción: ");
+
             try {
-                
-                opc=Integer.parseInt(leer.readLine());
-                
+                opc = Integer.parseInt(leer.readLine());
             } catch (NumberFormatException e) {
-                
-                System.out.println("Error de tipo " + e);
-                opc=0;
+                System.out.println("Error: " + e.getMessage());
+                opc = 0;
             }
-        
-        switch (opc) {
-            
-            case 1:
-                //ingreso de registros
-                System.out.println("==============================");
-                System.out.println("1       REGISTRAR VEHÍCULO           |");
-                System.out.println("==============================");
-                System.out.println("|  Tipo de vehículo:                 |");
-                System.out.println("|  1. Bus                            |");
-                System.out.println("|  2. Buseta                         |");
-                System.out.println("|  3. MicroBus                       |");
-                System.out.println("===============================");
-                System.out.print("   Seleccione el tipo: ");
-                
-                int tipo = Integer.parseInt(leer.readLine());
-                
-                System.out.println("==============================");
-                System.out.println("|       DATOS DEL VEHÍCULO           |");
-                System.out.println("==============================");
 
-                System.out.print("|  Placa: ");
-                String placa = leer.readLine();
+            switch (opc) {
 
-                rutaServices rs = new rutaServices();
-                
-                try {
-                            List<Ruta> rutas = rs.listar();
-                            System.out.println("==============================");
-                            System.out.println("|       RUTAS DISPONIBLES            |");
-                            System.out.println("==============================");
-                            
-                            for (Ruta r : rutas) {
-                                System.out.println("|  " + r.getCodigo() + " - " + 
-                               r.getC_origen() + " → " + r.getC_destino());
-                            }
-                            System.out.println("==============================");
-                            
-                } catch (Exception e) {
-                    System.out.println("No hay rutas registradas: " + e.getMessage());
-                }
-                
-                System.out.print("|  Código de ruta: ");
-                String codigoRuta = leer.readLine();
+                case 1:
+                    System.out.println("REGISTRAR VEHÍCULO");
 
-                System.out.print("|  Tarifa base (BUSETA=8K MICROBUS=10K BUS=15K): ");
-                float tarifa = Float.parseFloat(leer.readLine());
+                    System.out.println("Tipo de vehículo:");
+                    System.out.println("1. Bus");
+                    System.out.println("2. Buseta");
+                    System.out.println("3. MicroBus");
+                    System.out.print("Seleccione: ");
+                    int tipo = Integer.parseInt(leer.readLine());
 
-                System.out.print("|  Disponible (true/false): ");
-                boolean disponible = Boolean.parseBoolean(leer.readLine());
+                    System.out.print("Placa: ");
+                    String placa = leer.readLine();
 
-                System.out.println("==============================");
-                
-                //identificacion de tipo de vehiculo para registrar
-                
-                try {
-                    
-                Ruta rutaSeleccionada = rs.buscar(codigoRuta);
-                    
-                switch (tipo) {
-                    case 1:
-                        v = new Bus(45, tarifa, placa, rutaSeleccionada, disponible);
-                        
-                        vs.validarRegistro(v);
-                        
-                        break;
-                        
-                    case 2:
-                        v = new Buseta(19, tarifa, placa, rutaSeleccionada, disponible);
-                        
-                        vs.validarRegistro(v);
-                        
-                        break;
-                        
-                    case 3:
-                        v = new MicroBus(25, tarifa, placa, rutaSeleccionada, disponible);
-                        
-                        vs.validarRegistro(v);
-                        
-                        break;
-                        
-                    default:
-                        System.out.println("INGRESE UNA OPCION DEL MENU");
-                }
-                
-                } catch (Exception e) {
-                    System.out.println("ERROR DE TIPO " + e);
-                }
-                
-                break;
-                
-            case 2:
-                
-                System.out.println("==============================");
-                System.out.println("|         BUSCAR VEHÍCULO            |");
-                System.out.println("==============================");
-                System.out.print("|  Ingrese la placa: ");
-                p = leer.readLine();
-                System.out.println("==============================");
-                
-                try {
-                    
-                    v=vs.validarBusqueda(p);
-                    
-                        System.out.println("╔=============================");
-                        System.out.println("|       VEHÍCULO ENCONTRADO          |");
-                        System.out.println("==============================");
-                        System.out.println("|  Placa:      " + v.getPlaca());
-                        System.out.println("|  Ruta:       " + v.getRuta().getCodigo());
-                        System.out.println("|  Capacidad:  " + v.getCapacidad());
-                        System.out.println("|  Tarifa:     " + v.getTarifa());
-                        System.out.println("|  Disponible: " + v.isDisponible());
-                        System.out.println("==============================");
+                    rutaServices rs = new rutaServices();
 
-                    
-                } catch (Exception e) {
-                    System.out.println("Erro de tipo " + e);
-                }
-                
-                break;
-                
-            case 3:
-                
-                        System.out.println("==============================");
-                        System.out.println("|        ELIMINAR VEHICULO            |");
-                        System.out.println("==============================");
-                        System.out.print("|  Ingrese la placa: ");
-                        p = leer.readLine();
-                        System.out.println("==============================");
-                        
-                        try {
-                           vs.eliminar(p);
-                            System.out.println("REGISTRO ELIMINADO");
-                        } catch (Exception e) {
-                            System.out.println("NO EXISTE ESTE REGISTRO ");
+                    try {
+                        List<Ruta> rutas = rs.listar();
+
+                        System.out.println("RUTAS DISPONIBLES:");
+                        for (Ruta r : rutas) {
+                            System.out.println(r.getCodigo() + " - " +
+                                    r.getC_origen() + " → " + r.getC_destino());
                         }
-                
-                break;
-                
-            case 4:
-                
-                try {
-                    
-                    List <Vehiculo> lista=vs.validarListado();
-                    
-                    System.out.println("==============================");
-                    System.out.println("|         LISTA DE VEHÍCULOS         |");
-                    System.out.println("==============================");
-                    
-                    for (Vehiculo ve : lista) {
-                        System.out.println("|  Placa:      " + ve.getPlaca());
-                        System.out.println("|  Ruta:       " + ve.getRuta().getCodigo());
-                        System.out.println("|  Capacidad:  " + ve.getCapacidad());
-                        System.out.println("|  Tarifa:     " + ve.getTarifa());
-                        System.out.println("|  Disponible: " + ve.isDisponible());
-                        System.out.println("===========================");
+
+                    } catch (Exception e) {
+                        System.out.println("No hay rutas: " + e.getMessage());
                     }
-                                                                        //
-                    System.out.println("===============================");
-                    
-                } catch (Exception e) {
-                    System.out.println("Error de tipo " + e);
-                }
-                
-                break;
-                
-            default:
-                System.out.println("INGRESE UNA OPCION DEL MENÚ");
-        }
 
-            
+                    System.out.print("Código de ruta: ");
+                    String codigoRuta = leer.readLine();
+
+                    System.out.print("Tarifa: ");
+                    float tarifa = Float.parseFloat(leer.readLine());
+
+                    System.out.print("Disponible (true/false): ");
+                    boolean disponible = Boolean.parseBoolean(leer.readLine());
+
+                    try {
+                        Ruta rutaSeleccionada = rs.buscar(codigoRuta);
+
+                        switch (tipo) {
+                            case 1:
+                                v = new Bus(45, tarifa, placa, rutaSeleccionada, disponible);
+                                break;
+                            case 2:
+                                v = new Buseta(19, tarifa, placa, rutaSeleccionada, disponible);
+                                break;
+                            case 3:
+                                v = new MicroBus(25, tarifa, placa, rutaSeleccionada, disponible);
+                                break;
+                            default:
+                                System.out.println("Opción inválida");
+                        }
+
+                        if (v != null) {
+                            vs.validarRegistro(v);
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+
+                    break;
+
+                case 2:
+                    System.out.print("Ingrese placa: ");
+                    p = leer.readLine();
+
+                    try {
+                        v = vs.validarBusqueda(p);
+
+                        System.out.println("VEHÍCULO ENCONTRADO");
+                        System.out.println("Placa: " + v.getPlaca());
+                        System.out.println("Ruta: " + v.getRuta().getCodigo());
+                        System.out.println("Capacidad: " + v.getCapacidad());
+                        System.out.println("Tarifa: " + v.getTarifa());
+                        System.out.println("Disponible: " + v.isDisponible());
+
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+
+                    break;
+
+                case 3:
+                    System.out.print("Ingrese placa: ");
+                    p = leer.readLine();
+
+                    try {
+                        vs.eliminar(p);
+                        System.out.println("VEHÍCULO ELIMINADO");
+                    } catch (Exception e) {
+                        System.out.println("NO EXISTE");
+                    }
+
+                    break;
+
+                case 4:
+                    try {
+                        List<Vehiculo> lista = vs.validarListado();
+
+                        for (Vehiculo ve : lista) {
+                            System.out.println("Placa: " + ve.getPlaca());
+                            System.out.println("Ruta: " + ve.getRuta().getCodigo());
+                            System.out.println("Capacidad: " + ve.getCapacidad());
+                            System.out.println("Tarifa: " + ve.getTarifa());
+                            System.out.println("Disponible: " + ve.isDisponible());
+                            System.out.println("----------------------");
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+
+                    break;
+
+                case 5:
+                    System.out.println("Saliendo...");
+                    break;
+
+                default:
+                    System.out.println("Opción inválida");
+            }
         }
-        
     }
-  }
-
+}

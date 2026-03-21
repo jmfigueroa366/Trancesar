@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/DAO/ReservaDAO.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/MODEL/Reserva.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/DAO/RutaDAO.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/MODEL/Pasajero.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/MODEL/PasajeroAdultoMayor.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/MODEL/PasajeroEstudiante.java</file>
-            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/MODEL/PasajeroRegular.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/VIEW/MenuReportes.java</file>
+            <file>file:/C:/Users/alvar/OneDrive/Documentos/NetBeansProjects/Trancesar/src/SERVICES/TicketService.java</file>
         </group>
     </open-files>
 </project-private>
