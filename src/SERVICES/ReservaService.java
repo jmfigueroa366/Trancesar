@@ -90,5 +90,24 @@ public class ReservaService {
         reservaDAO.guardarReserva(reserva);
         System.out.println("Reserva registrada exitosamente...");
     }
-   
+    
+    //Cancelar una reserva 
+    public void cancelarReserva(String codigo) throws Exception {
+
+    List<Reserva> lista = reservaDAO.listarReservas();
+    boolean buscar = false;
+    
+    for (Reserva r : lista) {
+        if (r.getCodigo().equals(codigo) && r.isActivo()) {
+            buscar = true;
+        }
+    }
+
+    if (!buscar) {
+        throw new IllegalArgumentException("No existe reserva activa con este codigo");
+    }
+
+    reservaDAO.cancelarRerserva(codigo);
+    System.out.println("Reserva cancelada correctamente");
 }
+    }
