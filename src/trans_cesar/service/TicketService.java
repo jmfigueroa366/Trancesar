@@ -192,6 +192,25 @@ public class TicketService {
         return resultados;
     }
     
+    //Resumen del dia actual con el total de tickets vendidos y el total recaudado
+    public void resumenPorDia() {
+        List<Ticket> lista = ticketDAO.listarTodos();
+        
+        int totalTickets = 0;
+        double recaudado = 0;
+        LocalDate hoy = LocalDate.now();
+        
+        for (Ticket t: lista) {
+            if (t.getFechaCompra().equals(hoy)) {
+                totalTickets++;
+                recaudado += t.getPrecioFinal();
+            }
+            System.out.println("===== RESUMEN DEL DIA =====");
+            System.out.println("|   Fecha:   " + hoy);
+            System.out.println("|   Total de tickets vendidos: " + totalTickets);
+            System.out.println("|   Total recaudado:   $" + recaudado);
+        }
+    }
     
     // Elimina un ticket por su numero.
     public void eliminarTicket(String NumeroTicket) {
