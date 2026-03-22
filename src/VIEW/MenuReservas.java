@@ -33,8 +33,14 @@ public class MenuReservas {
                 System.out.println("6. Salir");
                 System.out.print("Seleccione una opción: ");
 
-                opcion = Integer.parseInt(leer.readLine());
+                try {
+                    opcion = Integer.parseInt(leer.readLine());
 
+                } catch (Exception e) {
+                    
+                    System.out.println("Error en ingreso de opciones "+ e);
+                    
+                }
                 switch (opcion) {
                 
                 case 1:
