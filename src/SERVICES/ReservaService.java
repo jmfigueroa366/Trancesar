@@ -11,6 +11,7 @@ import MODEL.Pasajero;
 import MODEL.Vehiculo;
 import MODEL.Reserva;
 import MODEL.Ticket;
+import SERVICES.TicketService;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,12 +25,14 @@ public class ReservaService {
     private PasajeroDAO pasajeroDAO;
     private VehiculoDAO vehiculoDAO;
     private TicketDAO ticketDAO;
+    private TicketService ticketService;
 
-    public ReservaService(ReservaDAO reservaDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO, TicketDAO ticketDAO) {
+    public ReservaService(ReservaDAO reservaDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO, TicketDAO ticketDAO, TicketService ticketService) {
         this.reservaDAO = reservaDAO;
         this.pasajeroDAO = pasajeroDAO;
         this.vehiculoDAO = vehiculoDAO;
         this.ticketDAO = ticketDAO;
+        this.ticketService = ticketService;
     }
     
     public void validarRegistro (String codigo, String idPasajero, String placaVehiculo, String fecha_reserva) 
@@ -138,4 +141,43 @@ public class ReservaService {
         return historial;
     }
     
+    //Convertir una reserva en ticket 
+    public void reservaAticket (String codigoReserva, String NumeroTicket) throws Exception {
+        //inicialmente se debe buscar la reserva y que este activa
+        Reserva reservaEncontrada = null;
+    
+    for (Reserva r : reservaDAO.listarReservas()) {
+        if (r.getCodigo().equals(codigoReserva) && reservaEncontrada.isActivo()) {
+            reservaEncontrada = r;
+            break;
+        }
+    }
+
+    if (reservaEncontrada == null) {
+        throw new IllegalArgumentException("No existe reserva activa con este codigo");
+    }
+    
+      //Se obtienen datos de pasajero y vehiculo
+    Pasajero pasajero = reservaEncontrada.getPasajero();
+    Vehiculo vehiculo = reservaEncontrada.getVehiculo();
+    LocalDate fechaCompra = LocalDate.parse(reservaEncontrada.getFecha_reserva());
+    
+    ticketService.validarRegistro(NumeroTicket, "OrigenCiudad", "DestinoCiudad", pasajero.getId(), vehiculo.getPlaca());
+    
+      //Ahora actualizamos la reserva
+    boolean actualizado = reservaDAO.ActualizarRegistros(codigoReserva, false);
+    
+    if (!actualizado) {
+        throw new IllegalArgumentException("Error en la actualización de la reseva");
+    }
+        System.out.println("Reserva convertida en ticket");
+    }
+    
+    
+    
+    public void cancelarReservasVencidas() throws Exception {
+        
+        List<Reserva> lista = reservaDAO.listarReservas();
+        int contador ;
+    }
 }
