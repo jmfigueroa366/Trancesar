@@ -19,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +140,7 @@ public class ReservaDAO {
                 
             }
         }
-        return reservas;
+        return lista;
     }
     
     public boolean cancelarRerserva(String codigo) throws FileNotFoundException, IOException{
@@ -215,4 +216,53 @@ public class ReservaDAO {
         }
         return null;
     }
+    
+    public boolean ActualizarRegistros(Reserva ReservaActualizada) throws FileNotFoundException, IOException{
+        List <String> lineas = new ArrayList<>();
+        
+        boolean encontrado = false;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(RutaArchivos.Reserva))){
+            
+            String linea;
+            
+            while ((linea = br.readLine()) !=null) {                
+                
+                if (linea.trim().isEmpty()) {
+                    String d[] = linea.split(";");
+                    
+                    if (d[0].equals(ReservaActualizada.getCodigo()) ) {
+                        
+                        Pasajero p = ReservaActualizada.getPasajero();
+                        Vehiculo v = ReservaActualizada.getVehiculo();
+                        linea =
+                        ReservaActualizada.getCodigo()        + ";" +
+                        ReservaActualizada.getFecha_creacion()+ ";" +
+                        ReservaActualizada.getFecha_reserva() + ";" +
+                        p.getId()                             + ";" +
+                        p.getNombre()                         + ";" +
+                        p.getFechaNacimiento()                + ";" +
+                        p.getClass().getSimpleName()          + ";" +
+                        v.getPlaca()                          + ";" +
+                        v.getTarifa()                         + ";" +
+                        v.getCapacidad()                      + ";" +
+                        v.getClass().getSimpleName()          + ";" +
+                        ReservaActualizada.isActivo();
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        }catch(IOException e){
+            
+            System.out.println("Error en actualizacion " + e);
+            return false;
+            
+        }
+        return encontrado;
+        
+     }
+    
    }
