@@ -4,15 +4,9 @@
  */
 package VIEW;
 
-import MODEL.Conductor;
 import MODEL.Ticket;
-import MODEL.Vehiculo;
-import SERVICES.ConductorService;
-import SERVICES.PasajeroService;
-import SERVICES.vehiculoServices;
 import SERVICES.TicketService;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.List;
@@ -78,6 +72,8 @@ public class MenuReportes {
                 break;
                 
             case 2:
+                
+                int tipoV=0;
                 // Buscar tickets vendidas por tipo de vehiculo
                 System.out.println("==============================");
                 System.out.println("|       TIPO DE VEHICULO       |");
@@ -86,17 +82,21 @@ public class MenuReportes {
                 System.out.println("2. MicroBus: ");
                 System.out.println("3. Buseta:   ");
                 
-                String tipoV = leer.readLine();
+                try {
+                     tipoV= Integer.parseInt(leer.readLine());
+                } catch (Exception e) {
+                    System.out.println("Error en ingreso de datos " + e);
+                }
                 String tipoVehiculo = "";
                 
-                switch (tipoVehiculo) {
-                    case "1":
+                switch (tipoV) {
+                    case 1:
                         tipoVehiculo = "Bus";
                         break;
-                    case "2":
+                    case 2:
                         tipoVehiculo = "MicroBus";
                         break;
-                    case "3":
+                    case 3:
                         tipoVehiculo = "Buseta";
                         break;
                     default:

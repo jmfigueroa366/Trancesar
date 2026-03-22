@@ -15,8 +15,6 @@ import MODEL.Ticket;
 import SERVICES.TicketService;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -30,6 +28,9 @@ public class ReservaService {
     private TicketDAO ticketDAO;
     private TicketService ticketService;
 
+    public ReservaService() {
+    }
+    
     public ReservaService(ReservaDAO reservaDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO, TicketDAO ticketDAO, TicketService ticketService) {
         this.reservaDAO = reservaDAO;
         this.pasajeroDAO = pasajeroDAO;
@@ -100,22 +101,22 @@ public class ReservaService {
     //Cancelar una reserva 
     public void cancelarReserva(String codigo) throws Exception {
 
-    List<Reserva> lista = reservaDAO.listarReservas();
-    boolean buscar = false;
-    
-    for (Reserva r : lista) {
-        if (r.getCodigo().equals(codigo) && r.isActivo()) {
-            buscar = true;
+        List<Reserva> lista = reservaDAO.listarReservas();
+        boolean buscar = false;
+
+        for (Reserva r : lista) {
+            if (r.getCodigo().equals(codigo) && r.isActivo()) {
+                buscar = true;
+            }
         }
-    }
 
-    if (!buscar) {
-        throw new IllegalArgumentException("No existe reserva activa con este codigo");
-    }
+        if (!buscar) {
+            throw new IllegalArgumentException("No existe reserva activa con este codigo");
+        }
 
-    reservaDAO.cancelarRerserva(codigo);
-    System.out.println("Reserva cancelada correctamente");
-}
+        reservaDAO.cancelarRerserva(codigo);
+        System.out.println("Reserva cancelada correctamente");
+    }
     //listar de reservas activas
     public List<Reserva> listarActivas() throws Exception {
         
@@ -145,89 +146,9 @@ public class ReservaService {
     }
     
     //Convertir una reserva en ticket 
-    public void Reserva_Ticket(String codigo) throws Exception {
+    public void reservaAticket(String codigoReserva, String NumeroTicket) throws Exception {
         
-    Reserva reservaEncontrada = null;
-
-        for (Reserva r : reservaDAO.listarReservas()) {
-            if (r.getCodigo().equals(codigo) && r.isActivo()) {
-                reservaEncontrada = r;
-                break;
-            }
-        }
-
-        if (reservaEncontrada == null) {
-            throw new IllegalArgumentException("No existe reserva activa con este codigo");
-        }
-
-        Pasajero pasajero = reservaEncontrada.getPasajero();
-        Vehiculo vehiculo = reservaEncontrada.getVehiculo();
-
-        // Obtener origen y destino desde la Ruta del vehículo
-        Ruta ruta = vehiculo.getRuta();
-        if (ruta == null) {
-            throw new IllegalArgumentException("El vehículo no tiene una ruta asignada");
-        }
-
-        String NumTicket = codigo;
-        String origen = ruta.getC_origen();
-        String destino = ruta.getC_destino();
-
-        ticketService.validarRegistro(
-            NumTicket, origen, destino, pasajero.getId(), vehiculo.getPlaca());
-
-        boolean actualizado = reservaDAO.ActualizarRegistros(reservaEncontrada);
-
-        if (!actualizado) {
-            throw new IllegalArgumentException("Error en la actualización de la reserva");
-        }
-
-        System.out.println("Reserva convertida en ticket exitosamente");
-        
-        }
-    
-    public boolean cancelarReservasVencidas (Reserva r) {
-
-    LocalDateTime fechaCreacion = LocalDateTime.parse(r.getFecha_creacion());
-    LocalDateTime ahora = LocalDateTime.now();
-
-    long horas = ChronoUnit.HOURS.between(fechaCreacion, ahora);
-
-    return horas > 24;
-}
-    
-    public void verificarReservasVencidas() throws Exception {
-
-    List<Reserva> lista = reservaDAO.listarReservas();
-
-    int canceladas = 0;
-
-    for (Reserva r : lista) {
-
-        // Solo reservas activas
-        if (r.isActivo()) {
-
-            LocalDateTime fechaCreacion = LocalDateTime.parse(r.getFecha_creacion());
-            LocalDateTime ahora = LocalDateTime.now();
-
-            long horas = ChronoUnit.HOURS.between(fechaCreacion, ahora);
-
-            if (horas > 24) {
-
-                // Cancelar reserva (eliminar del archivo)
-                boolean eliminado = reservaDAO.cancelarRerserva(r.getCodigo());
-
-                if (eliminado) {
-                    canceladas++;
-                }
-            }
-        }
     }
-
-    System.out.println("===================================");
-    System.out.println(" VERIFICACIÓN DE RESERVAS VENCIDAS ");
-    System.out.println("===================================");
-    System.out.println("Reservas canceladas: " + canceladas);
-}
-
+    public void cancelarReservasVencidas() throws Exception {
+    }
 }
