@@ -14,10 +14,12 @@ public class view {
             System.out.println("\n=== SISTEMA TRANSCESAR ===");
             System.out.println("1. Menu conductor");
             System.out.println("2. Menu pasajero");
-            System.out.println("3. Menu ticket");
-            System.out.println("4. Menu rutas");
-            System.out.println("5. Menu vehiculos");
-            System.out.println("6. Salir");
+            System.out.println("3.menu reportes");
+            System.out.println("4. Menu ticket");
+            System.out.println("5. Menu rutas");
+            System.out.println("6. Menu vehiculos");
+            System.out.println("7.menu reserva");
+            System.out.println("8. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = sc.nextInt();
@@ -32,18 +34,23 @@ public class view {
                     break;
 
                 case 3:
-                    new MenuTicket().mostrarMenu();
+                    new MenuReportes().menuReportes();
                     break;
 
                 case 4:
-                    new menuRutas().mostrarMenu(); // corregido nombre
+                    new MenuTicket().mostrarMenu();// corregido nombre
                     break;
 
                 case 5:
-                    new menuVehiculo().mostrarMenu(); // corregido nombre
+                    new menuRutas().mostrarMenu();// corregido nombre
                     break;
-
                 case 6:
+                    new menuVehiculo().mostrarMenu();
+                    break;
+                case 7:
+                    
+                    break;
+                case 8:
                     System.out.println("Saliendo...");
                     break;
 
@@ -51,7 +58,7 @@ public class view {
                     System.out.println("Opción inválida");
             }
 
-        } while (opcion != 6);
+        } while (opcion != 8);
     }
 
     // 🔥 MAIN AGREGADO

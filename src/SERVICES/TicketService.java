@@ -173,7 +173,7 @@ public class TicketService {
     }
     
     //Lista de tickets vendidas por tipo de vehiculo
-    public List<Ticket> consultarPorTipoVehiculo(int tipo) {
+    public List<Ticket> consultarPorTipoVehiculo(String tipo) {
         List<Ticket> resultado = new ArrayList<>();
         
         for (Ticket t: ticketDAO.listarTodos()) {
