@@ -10,6 +10,7 @@ import DAO.VehiculoDAO;
 import MODEL.Pasajero;
 import MODEL.Vehiculo;
 import MODEL.Reserva;
+import MODEL.Ruta;
 import MODEL.Ticket;
 import SERVICES.TicketService;
 import java.io.IOException;
@@ -27,6 +28,9 @@ public class ReservaService {
     private TicketDAO ticketDAO;
     private TicketService ticketService;
 
+    public ReservaService() {
+    }
+    
     public ReservaService(ReservaDAO reservaDAO, PasajeroDAO pasajeroDAO, VehiculoDAO vehiculoDAO, TicketDAO ticketDAO, TicketService ticketService) {
         this.reservaDAO = reservaDAO;
         this.pasajeroDAO = pasajeroDAO;
@@ -97,22 +101,22 @@ public class ReservaService {
     //Cancelar una reserva 
     public void cancelarReserva(String codigo) throws Exception {
 
-    List<Reserva> lista = reservaDAO.listarReservas();
-    boolean buscar = false;
-    
-    for (Reserva r : lista) {
-        if (r.getCodigo().equals(codigo) && r.isActivo()) {
-            buscar = true;
+        List<Reserva> lista = reservaDAO.listarReservas();
+        boolean buscar = false;
+
+        for (Reserva r : lista) {
+            if (r.getCodigo().equals(codigo) && r.isActivo()) {
+                buscar = true;
+            }
         }
-    }
 
-    if (!buscar) {
-        throw new IllegalArgumentException("No existe reserva activa con este codigo");
-    }
+        if (!buscar) {
+            throw new IllegalArgumentException("No existe reserva activa con este codigo");
+        }
 
-    reservaDAO.cancelarRerserva(codigo);
-    System.out.println("Reserva cancelada correctamente");
-}
+        reservaDAO.cancelarRerserva(codigo);
+        System.out.println("Reserva cancelada correctamente");
+    }
     //listar de reservas activas
     public List<Reserva> listarActivas() throws Exception {
         
@@ -142,42 +146,9 @@ public class ReservaService {
     }
     
     //Convertir una reserva en ticket 
-    public void reservaAticket (String codigoReserva, String NumeroTicket) throws Exception {
-        //inicialmente se debe buscar la reserva y que este activa
-        Reserva reservaEncontrada = null;
-    
-    for (Reserva r : reservaDAO.listarReservas()) {
-        if (r.getCodigo().equals(codigoReserva) && reservaEncontrada.isActivo()) {
-            reservaEncontrada = r;
-            break;
-        }
-    }
-
-    if (reservaEncontrada == null) {
-        throw new IllegalArgumentException("No existe reserva activa con este codigo");
-    }
-    
-      //Se obtienen datos de pasajero y vehiculo
-    Pasajero pasajero = reservaEncontrada.getPasajero();
-    Vehiculo vehiculo = reservaEncontrada.getVehiculo();
-    LocalDate fechaCompra = LocalDate.parse(reservaEncontrada.getFecha_reserva());
-    
-    ticketService.validarRegistro(NumeroTicket, "OrigenCiudad", "DestinoCiudad", pasajero.getId(), vehiculo.getPlaca());
-    
-      //Ahora actualizamos la reserva
-    boolean actualizado = reservaDAO.ActualizarRegistros(codigoReserva, false);
-    
-    if (!actualizado) {
-        throw new IllegalArgumentException("Error en la actualización de la reseva");
-    }
-        System.out.println("Reserva convertida en ticket");
-    }
-    
-    
-    
-    public void cancelarReservasVencidas() throws Exception {
+    public void reservaAticket(String codigoReserva, String NumeroTicket) throws Exception {
         
-        List<Reserva> lista = reservaDAO.listarReservas();
-        int contador ;
+    }
+    public void cancelarReservasVencidas() throws Exception {
     }
 }

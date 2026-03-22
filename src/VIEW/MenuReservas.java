@@ -5,20 +5,23 @@
 package VIEW;
 
 
+import MODEL.Reserva;
+import SERVICES.ReservaService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 /**
  *
  * @author alvar
  */
 public class MenuReservas {
 
-    public MenuReservas() throws IOException {
+    public MenuReservas(ReservaService rs) throws IOException {
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         
         int opcion=0;
-        
+         
         while (opcion!=6) {
         
             System.out.println("\n===== MENÚ DE RESERVAS =====");
@@ -33,24 +36,124 @@ public class MenuReservas {
                 opcion = Integer.parseInt(leer.readLine());
 
                 switch (opcion) {
+                
                 case 1:
+                    System.out.println("\n===== CREAR RESERVA =====");
 
-                    break;
+                    System.out.println("Ingrese codigo de reserva");
+                    String codigo = leer.readLine();
 
+                    System.out.println("ID del pasajero");
+                    String idp = leer.readLine();
+
+                    System.out.println("Ingrese la placa del vehiculo");
+                    String placa = leer.readLine();
+
+                    System.out.print("Fecha de reserva (YYYY-MM-DD): ");
+                    String fecha = leer.readLine();
+
+                        try {
+                            rs.validarRegistro(codigo, idp, placa, fecha);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error de validación: " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                    break;    
+                    
                 case 2:
-
-                    break;
+                    
+                    System.out.println("\n===== CANCELAR RESERVA =====");
+                    
+                    System.out.println("Ingrese el codigo de la reserva");
+                    String codigo_c = leer.readLine();
+                    
+                    try {
+                            rs.cancelarReserva(codigo_c);
+                            
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error de validación: " + e.getMessage());
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        break;
 
                 case 3:
+                    
+                       System.out.println("\n===== RESERVAS ACTIVAS =====");
+                        try {
+                            List<Reserva> activas = rs.listarActivas();
 
-                    break;
+                            if (activas.isEmpty()) {
+                                System.out.println("No hay reservas activas registradas.");
+                            } else {
+                                System.out.printf("%-10s %-15s %-20s %-15s %-12s%n",
+                                    "Código", "ID Pasajero", "Nombre Pasajero", "Placa", "Fecha");
+                                System.out.println("-".repeat(75));
+
+                                for (Reserva r : activas) {
+                                    System.out.printf("%-10s %-15s %-20s %-15s %-12s%n",
+                                        r.getCodigo(),
+                                        r.getPasajero().getId(),
+                                        r.getPasajero().getNombre(),
+                                        r.getVehiculo().getPlaca(),
+                                        r.getFecha_reserva()
+                                    );
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        break;
 
                 case 4:
+                    
+                        System.out.println("\n===== HISTORIAL POR PASAJERO =====");
+                        System.out.print("Ingrese el ID del pasajero: ");
+                        String idBuscar = leer.readLine();
 
-                    break;
+                        try {
+                            List<Reserva> historial = rs.historialPorPasajero(idBuscar);
+
+                            if (historial.isEmpty()) {
+                                System.out.println("No hay reservas para este pasajero.");
+                            } else {
+                                System.out.printf("%-10s %-12s %-12s %-12s %-10s%n",
+                                    "Código", "Placa", "F. Reserva", "F. Creación", "Estado");
+                                System.out.println("-".repeat(60));
+
+                                for (Reserva r : historial) {
+                                    System.out.printf("%-10s %-12s %-12s %-12s %-10s%n",
+                                        r.getCodigo(),
+                                        r.getVehiculo().getPlaca(),
+                                        r.getFecha_reserva(),
+                                        r.getFecha_creacion(),
+                                        r.isActivo() ? "Activa" : "Cancelada"
+                                    );
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        break;
 
                 case 5:
+                        System.out.println("\n===== CONVERTIR RESERVA A TICKET =====");
+                        System.out.print("Código de la reserva: ");
+                        String codigoReserva = leer.readLine();
 
+                        System.out.print("Número del ticket: ");
+                        String numeroTicket = leer.readLine();
+
+                        try {
+                            rs.reservaAticket(codigoReserva, numeroTicket);
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        break;
+
+                case 6:
+                    System.out.println("Volviendo al menú principal...");
                     break;
 
                 default:
