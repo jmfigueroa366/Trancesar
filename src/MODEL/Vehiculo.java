@@ -8,7 +8,7 @@ package MODEL;
  *
  * @author alvar
  */
-public abstract class Vehiculo {
+public abstract class Vehiculo implements Imprimible {
     
     private int capacidad;
     private float tarifa;
@@ -65,5 +65,10 @@ public abstract class Vehiculo {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+    
+    @Override
+    public void imprimirDetalle() {
+        
     }
 }
