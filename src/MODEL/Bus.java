@@ -17,4 +17,9 @@ public class Bus extends Vehiculo{
         super(capacidad, tarifa, placa, ruta, disponible);
     }
     
+    @Override
+    public void imprimirDetalle() {
+        
+    }
+    
 }
