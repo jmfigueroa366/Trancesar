@@ -14,7 +14,7 @@ public class Bus extends Vehiculo{
     }
     
     public Bus(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible){
-        super(capacidad, tarifa, placa, ruta, disponible);
+        super(45, tarifa, placa, ruta, disponible);
     }
     
     @Override

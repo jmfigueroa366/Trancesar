@@ -14,7 +14,7 @@ public class Buseta extends Vehiculo{
     }
     
     public Buseta(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible){
-        super(capacidad, tarifa, placa, ruta, disponible);
+        super(19, tarifa, placa, ruta, disponible);
     }
     
     @Override
