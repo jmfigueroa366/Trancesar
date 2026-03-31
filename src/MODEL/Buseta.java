@@ -20,6 +20,15 @@ public class Buseta extends Vehiculo{
     @Override
     public void imprimirDetalle() {
         
+        String disponibilidad = isDisponible() ? "DISPONIBLE" : "OCUPADO";
+        
+        System.out.println("MICROBUS");
+        System.out.println("CAPACIDAD: " + "19 PASAJEROS");
+        System.out.println("TARIFA: " + getTarifa());
+        System.out.println("PLACA: " + getPlaca());
+        System.out.println("RUTA: " + getRuta());
+        System.out.println("ESTADO " + disponibilidad);
+        
     }
     
 }
