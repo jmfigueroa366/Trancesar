@@ -40,14 +40,17 @@ public class ReservaDAO {
         Vehiculo v = r.getVehiculo();
 
         bw.write(
-            r.getCodigo()          + ";" +
-            r.getFecha_creacion()  + ";" +
-            r.getFecha_reserva()   + ";" +
-            p.getId()              + ";" +   
-            p.getNombre()          + ";" + 
-            v.getPlaca()           + ";" +   
-            v.getTarifa()          + ";" +   
-            v.getCapacidad()       + ";" +   
+            r.getCodigo()                + ";" +
+            r.getFecha_creacion()        + ";" +
+            r.getFecha_reserva()         + ";" +
+            p.getId()                    + ";" +   
+            p.getNombre()                + ";" + 
+            p.getFechaNacimiento()       + ";" + 
+            p.getClass().getSimpleName() + ";" + 
+            v.getPlaca()                 + ";" +   
+            v.getTarifa()                + ";" +   
+            v.getCapacidad()             + ";" +   
+            v.getClass().getSimpleName() + ";" + 
             r.isActivo()                     
         );
         bw.newLine();
@@ -228,7 +231,7 @@ public class ReservaDAO {
             
             while ((linea = br.readLine()) !=null) {                
                 
-                if (linea.trim().isEmpty()) {
+                if (!linea.trim().isEmpty()) {
                     String d[] = linea.split(";");
                     
                     if (d[0].equals(ReservaActualizada.getCodigo()) ) {
@@ -250,7 +253,7 @@ public class ReservaDAO {
                         ReservaActualizada.isActivo();
                         
                     }
-                    
+                    lineas.add(linea);
                 }
                 
             }
