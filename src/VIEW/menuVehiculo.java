@@ -117,13 +117,8 @@ public class menuVehiculo {
                     try {
                         v = vs.validarBusqueda(p);
 
-                        System.out.println("VEHÍCULO ENCONTRADO");
-                        System.out.println("Placa: " + v.getPlaca());
-                        System.out.println("Ruta: " + v.getRuta().getCodigo());
-                        System.out.println("Capacidad: " + v.getCapacidad());
-                        System.out.println("Tarifa: " + v.getTarifa());
-                        System.out.println("Disponible: " + v.isDisponible());
-
+                        v.imprimirDetalle();
+                        
                     } catch (Exception e) {
                         System.out.println("Error: " + e.getMessage());
                     }
@@ -148,11 +143,9 @@ public class menuVehiculo {
                         List<Vehiculo> lista = vs.validarListado();
 
                         for (Vehiculo ve : lista) {
-                            System.out.println("Placa: " + ve.getPlaca());
-                            System.out.println("Ruta: " + ve.getRuta().getCodigo());
-                            System.out.println("Capacidad: " + ve.getCapacidad());
-                            System.out.println("Tarifa: " + ve.getTarifa());
-                            System.out.println("Disponible: " + ve.isDisponible());
+                            
+                            ve.imprimirDetalle();
+                            
                             System.out.println("----------------------");
                         }
 

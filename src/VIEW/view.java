@@ -22,7 +22,7 @@ public class view {
         
         while (opcion!=7) {            
             
-        
+            
         do {
             System.out.println("\n=== SISTEMA TRANSCESAR ===");
             System.out.println("1. Menu conductor");

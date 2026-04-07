@@ -14,7 +14,21 @@ public class Buseta extends Vehiculo{
     }
     
     public Buseta(int capacidad, float tarifa, String placa, Ruta ruta, boolean disponible){
-        super(capacidad, tarifa, placa, ruta, disponible);
+        super(19, tarifa, placa, ruta, disponible);
+    }
+    
+    @Override
+    public void imprimirDetalle() {
+        
+        String disponibilidad = isDisponible() ? "DISPONIBLE" : "OCUPADO";
+        
+        System.out.println("MICROBUS");
+        System.out.println("CAPACIDAD: " + "19 PASAJEROS");
+        System.out.println("TARIFA: " + getTarifa());
+        System.out.println("PLACA: " + getPlaca());
+        System.out.println("RUTA: " + getRuta());
+        System.out.println("ESTADO " + disponibilidad);
+        
     }
     
 }
