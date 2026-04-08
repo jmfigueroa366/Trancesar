@@ -69,13 +69,13 @@ public class PasajeroDAO {
                         Pasajero pasajero;
                     switch (tipo) {
                         case "Pasajero Regular":
-                            pasajero = new PasajeroRegular (Descuento, id, nombre, fechaNacimiento);
+                            pasajero = new PasajeroRegular (id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroEstudiante(Descuento, id, nombre, fechaNacimiento);
+                            pasajero = new PasajeroEstudiante(id, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroAdultoMayor(Descuento, id, nombre, fechaNacimiento);
+                            pasajero = new PasajeroAdultoMayor(id, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;
@@ -107,13 +107,13 @@ public class PasajeroDAO {
                     Pasajero pasajero;
                     switch (tipo) {
                         case "Pasajero Regular":
-                            pasajero = new PasajeroRegular(Descuento, tipo, nombre, fechaNacimiento);
+                            pasajero = new PasajeroRegular(tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Estudiante":
-                            pasajero = new PasajeroEstudiante(Descuento, tipo, nombre, fechaNacimiento);
+                            pasajero = new PasajeroEstudiante(tipo, nombre, fechaNacimiento);
                             break;
                         case "Pasajero Adulto Mayor":
-                            pasajero = new PasajeroAdultoMayor(Descuento, tipo, nombre, fechaNacimiento);
+                            pasajero = new PasajeroAdultoMayor(tipo, nombre, fechaNacimiento);
                             break;
                         default:
                             pasajero=null;

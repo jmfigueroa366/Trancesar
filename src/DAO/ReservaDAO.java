@@ -65,15 +65,15 @@ public class ReservaDAO {
        switch (tipo) {
            case "PasajeroRegular":
                
-               return new PasajeroRegular(0, id, nombre, fechaNac);
+               return new PasajeroRegular(id, nombre, fechaNac);
                
            case "PasajeroAdultoMayor":
                
-               return new PasajeroAdultoMayor(0, id, nombre, fechaNac);
+               return new PasajeroAdultoMayor(id, nombre, fechaNac);
                
            case "PasajeroEstudiante":
                
-               return new PasajeroEstudiante(0, id, nombre, fechaNac);
+               return new PasajeroEstudiante(id, nombre, fechaNac);
                
            default:
                return null;

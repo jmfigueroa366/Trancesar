@@ -54,16 +54,16 @@ public class TicketDAO {
                     String [] datos = linea.split (";");
                     if (datos[0].equals(NumeroTicket)) {
                         String NumTicket = datos[0];
-                        LocalDate fechaCompra = LocalDate.parse(datos[1]);
-                        String OrigenCiudad = datos[2];
-                        String DestinoCiudad = datos[3];
-                        double PrecioFinal = Double.parseDouble(datos[4]);
                         String idPasajero = datos[5];
                         Pasajero IdP = p.BuscarId(idPasajero);
                         String PlacaVehiculo = datos[6];
                         Vehiculo pv = vd.buscarPorPlaca(PlacaVehiculo);
+                        LocalDate fechaCompra = LocalDate.parse(datos[1]);
+                        String OrigenCiudad = datos[2];
+                        String DestinoCiudad = datos[3];
+                        double PrecioFinal = Double.parseDouble(datos[4]);
                         
-                        return new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, pv);
+                        return new Ticket (NumTicket, IdP, pv, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal);
                     }
                 }
             } catch (IOException e) {
@@ -90,7 +90,7 @@ public class TicketDAO {
                     String PlacaVehiculo = datos[6];
                     Vehiculo pv = vd.buscarPorPlaca(PlacaVehiculo);
                   
-                    lista.add( new Ticket (NumTicket, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal, IdP, pv));
+                    lista.add( new Ticket (NumTicket, IdP, pv, fechaCompra, OrigenCiudad, DestinoCiudad, PrecioFinal));
                     }
             }
         } catch (IOException e) {
@@ -104,7 +104,7 @@ public class TicketDAO {
         try (BufferedWriter bw = new BufferedWriter (new FileWriter (RutaArchivos.Ticket, false))) {
             for (Ticket t : ticket) {
                 if (!t.getNumeroTicket().equals(NumeroTicket)) {
-                    bw.write(t.getNumeroTicket()+";"+t.getDestinoCiudad()+";"+t.getOrigenCiudad()+";"+t.getPrecioFinal()+";"+t.getPasajero()+";"+t.getVehiculo());
+                    bw.write(t.getNumeroTicket()+";"+t.getPasajero()+";"+t.getVehiculo()+";"+t.getFechaCompra()+";"+t.getOrigenCiudad()+";"+t.getDestinoCiudad()+";"+t.getPrecioFinal());
                     bw.newLine();
                 }
             }
