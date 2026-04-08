@@ -5,6 +5,7 @@
 package MODEL;
 import MODEL.Imprimible;
 import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -44,9 +45,13 @@ public abstract class Persona implements Imprimible {
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    
 
     @Override
     public void imprimirDetalle() {
-        
+        int edad = Period.between(getFechaNacimiento(), LocalDate.now()).getYears();
+         System.out.println("Cedula: " + getId());
+         System.out.println("Nombre: " + getNombre());
+         System.out.println("Edad: " + edad + "años");
     }
 }

@@ -12,19 +12,19 @@ import java.time.Period;
  */
 public class PasajeroRegular extends Pasajero {
 
-    public PasajeroRegular(double Descuento, String id, String nombre, LocalDate fechaNacimiento) {
-        super(0.0, id, nombre, fechaNacimiento);
+    public PasajeroRegular(String id, String nombre, LocalDate fechaNacimiento) {
+        super(id, nombre, fechaNacimiento);
     }
     
     @Override
     public double calcularDescuento() {
-        return Descuento;
+        return 0.0;
     }
 
     @Override
     public void imprimirDetalle() {
          int edad = Period.between(getFechaNacimiento(), LocalDate.now()).getYears();
-         System.out.println("PASAJERO REGULAR");
+         System.out.println("DATOS DEL PASAJERO");
          System.out.println("Cedula: " + getId());
          System.out.println("Nombre: " + getNombre());
          System.out.println("Edad: " + edad + "años");

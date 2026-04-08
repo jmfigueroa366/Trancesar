@@ -12,7 +12,7 @@ import java.time.Period;
  */
 public class Conductor extends Persona {
     private String numeroLicencia;
-    private String categoriaLicencia;
+    private String categoriaLicencia; // B1, B2, C1, C2
 
     public Conductor(String numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) {
         super(id, nombre, fechaNacimiento);

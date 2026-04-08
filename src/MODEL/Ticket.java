@@ -14,21 +14,21 @@ import java.time.LocalDate;
  */
 public class Ticket implements Imprimible, Calculable {
     private String NumeroTicket;
+    private Pasajero pasajero;
+    private Vehiculo vehiculo;
     private LocalDate fechaCompra;
     private String OrigenCiudad;
     private String DestinoCiudad;
     private double PrecioFinal;
-    private Pasajero pasajero;
-    private Vehiculo vehiculo;
 
-    public Ticket(String NumeroTicket, LocalDate fechaCompra, String OrigenCiudad, String DestinoCiudad, double PrecioFinal, Pasajero pasajero, Vehiculo vehiculo) {
+    public Ticket(String NumeroTicket, Pasajero pasajero, Vehiculo vehiculo, LocalDate fechaCompra, String OrigenCiudad, String DestinoCiudad, double PrecioFinal) {
         this.NumeroTicket = NumeroTicket;
+        this.pasajero = pasajero;
+        this.vehiculo = vehiculo;
         this.fechaCompra = fechaCompra;
         this.OrigenCiudad = OrigenCiudad;
         this.DestinoCiudad = DestinoCiudad;
-        this.PrecioFinal = calcularTotal();
-        this.pasajero = pasajero;
-        this.vehiculo = vehiculo;
+        this.PrecioFinal = 0;
     }
 
     public String getNumeroTicket() {
@@ -37,6 +37,22 @@ public class Ticket implements Imprimible, Calculable {
 
     public void setNumeroTicket(String NumeroTicket) {
         this.NumeroTicket = NumeroTicket;
+    }
+
+    public Pasajero getPasajero() {
+        return pasajero;
+    }
+
+    public void setPasajero(Pasajero pasajero) {
+        this.pasajero = pasajero;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     public LocalDate getFechaCompra() {
@@ -71,28 +87,12 @@ public class Ticket implements Imprimible, Calculable {
         this.PrecioFinal = PrecioFinal;
     }
 
-    public Pasajero getPasajero() {
-        return pasajero;
-    }
-
-    public void setPasajero(Pasajero pasajero) {
-        this.pasajero = pasajero;
-    }
-
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-    
-    
     @Override
     public double calcularTotal() {
         double tarifa = vehiculo.getTarifa();
         double Descuento = pasajero.calcularDescuento();
-        return tarifa -(tarifa*Descuento);
+        PrecioFinal = tarifa -(tarifa*Descuento);
+        return PrecioFinal;
     }
     
         @Override
@@ -100,7 +100,7 @@ public class Ticket implements Imprimible, Calculable {
          System.out.println("TICKET");
          System.out.println("Numero de Ticket: " + getNumeroTicket());
          System.out.println("Fecha de Compra: " + getFechaCompra());
-         System.out.println("Nombre del Pasajero: " + pasajero.getId());
+         System.out.println("Nombre del Pasajero: " + pasajero.getNombre());
          System.out.println("Placa del Vehiculo: " + vehiculo.getPlaca());
          System.out.println("Ciudad de Origen: " + getOrigenCiudad());
          System.out.println("Ciudad de Destino: " + getDestinoCiudad());
