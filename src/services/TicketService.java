@@ -2,19 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package SERVICES;
-import DAO.TicketDAO;
-import DAO.PasajeroDAO;
-import MODEL.PasajeroRegular;
-import MODEL.PasajeroEstudiante;
-import MODEL.PasajeroAdultoMayor;
-import DAO.VehiculoDAO;
-import MODEL.Bus;
-import MODEL.Buseta;
-import MODEL.MicroBus;
-import MODEL.Ticket;
-import MODEL.Pasajero;
-import MODEL.Vehiculo;
+package services;
+import dao.TicketDAO;
+import dao.PasajeroDAO;
+import model.PasajeroRegular;
+import model.PasajeroEstudiante;
+import model.PasajeroAdultoMayor;
+import dao.VehiculoDAO;
+import model.Bus;
+import model.Buseta;
+import model.MicroBus;
+import model.Ticket;
+import model.Pasajero;
+import model.Vehiculo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package VIEW;
+package view;
 
-import MODEL.Ticket;
-import SERVICES.TicketService;
+import model.Ticket;
+import services.TicketService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.time.LocalDate;

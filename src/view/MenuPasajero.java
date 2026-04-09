@@ -1,7 +1,7 @@
-package VIEW;
+package view;
 
-import MODEL.Pasajero;
-import SERVICES.PasajeroService;
+import model.Pasajero;
+import services.PasajeroService;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

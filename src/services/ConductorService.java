@@ -1,7 +1,7 @@
 
-package SERVICES;
-import DAO.ConductorDAO;
-import MODEL.Conductor;
+package services;
+import dao.ConductorDAO;
+import model.Conductor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;

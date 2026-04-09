@@ -1,8 +1,8 @@
-package VIEW;
+package view;
 
-import DAO.ConductorDAO;
-import MODEL.Conductor;
-import SERVICES.ConductorService;
+import dao.ConductorDAO;
+import model.Conductor;
+import services.ConductorService;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

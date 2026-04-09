@@ -1,8 +1,8 @@
 
-package DAO;
+package dao;
 
-import MODEL.Conductor;
-import trancesar.util.RutaArchivos;
+import model.Conductor;
+import Trancesar.RutaArchivos;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedWriter; 

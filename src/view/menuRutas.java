@@ -1,7 +1,7 @@
-package VIEW;
+package view;
 
-import MODEL.Ruta;
-import SERVICES.rutaServices;
+import model.Ruta;
+import services.rutaServices;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

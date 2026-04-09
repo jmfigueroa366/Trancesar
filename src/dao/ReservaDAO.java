@@ -2,17 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAO;
+package dao;
 
-import MODEL.Bus;
-import MODEL.Buseta;
-import MODEL.MicroBus;
-import MODEL.Pasajero;
-import MODEL.PasajeroAdultoMayor;
-import MODEL.PasajeroEstudiante;
-import MODEL.PasajeroRegular;
-import MODEL.Reserva;
-import MODEL.Vehiculo;
+import model.Bus;
+import model.Buseta;
+import model.MicroBus;
+import model.Pasajero;
+import model.PasajeroAdultoMayor;
+import model.PasajeroEstudiante;
+import model.PasajeroRegular;
+import model.Reserva;
+import model.Vehiculo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import trancesar.util.RutaArchivos;
+import Trancesar.RutaArchivos;
 /**
  *
  * @author alvar

@@ -1,7 +1,7 @@
 
-package MODEL;
+package model;
 
-import MODEL.Pasajero;
+import model.Pasajero;
 import java.time.LocalDate;
 import java.time.Period;
 /**

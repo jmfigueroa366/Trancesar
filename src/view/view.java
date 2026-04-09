@@ -1,6 +1,10 @@
-package VIEW;
-import DAO.*;
-import SERVICES.*;
+package view;
+import services.ReservaService;
+import services.TicketService;
+import dao.ReservaDAO;
+import dao.TicketDAO;
+import dao.PasajeroDAO;
+import dao.VehiculoDAO;
 import java.util.Scanner;
 
 public class view {

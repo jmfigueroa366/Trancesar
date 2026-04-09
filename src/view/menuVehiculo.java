@@ -1,12 +1,12 @@
-package VIEW;
+package view;
 
-import MODEL.Bus;
-import MODEL.Buseta;
-import MODEL.MicroBus;
-import MODEL.Vehiculo;
-import MODEL.Ruta;
-import SERVICES.rutaServices;
-import SERVICES.vehiculoServices;
+import model.Bus;
+import model.Buseta;
+import model.MicroBus;
+import model.Vehiculo;
+import model.Ruta;
+import services.rutaServices;
+import services.vehiculoServices;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
