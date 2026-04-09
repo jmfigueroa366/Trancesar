@@ -24,10 +24,7 @@ public class ConductorService {
     
     public void validarRegistro (String numeroLicencia, String categoriaLicencia, String id, String nombre, LocalDate fechaNacimiento) 
                 throws Exception {
-        // Inicialmente s verifica que no exista diplicacion de ID
-        if (conductorDAO.BuscarId(id) !=null ) {
-             throw new IllegalArgumentException("Ya se ingreso un conductor con este ID");
-        }
+        
         // Validacion de los datos basicos
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID no puede estar vacío");
@@ -44,9 +41,17 @@ public class ConductorService {
         if (categoriaLicencia == null || categoriaLicencia.isEmpty()) {
             throw new IllegalArgumentException("La categoria de licencia no puede estar vacio");
         }
+        
         //Validación de la categoria entre B1, B2, C1, C2
-        if (!categoriasValidas.contains(categoriaLicencia.toUpperCase())){
-            throw new IllegalArgumentException("Categoria de licencia invalida (B1, B2, C1, C2).");
+        if (!categoriasValidas.contains(categoriaLicencia.toUpperCase())) {
+            throw new IllegalArgumentException(
+                "Categoría de licencia inválida: '" + categoriaLicencia
+                + "'. Valores aceptados: B1, B2, C1, C2.");
+        }
+        
+        // Verificar que no exista diplicacion de ID
+        if (conductorDAO.BuscarId(id) !=null ) {
+             throw new IllegalArgumentException("Ya se ingreso un conductor con este ID" + id);
         }
         
         Conductor conductor = new Conductor (numeroLicencia, categoriaLicencia, id, nombre, fechaNacimiento);
@@ -54,13 +59,11 @@ public class ConductorService {
         System.out.println("Conductor registrado correctamente");
     }
     
-    /**
-     * Busca un estudiante por ID y carga sus notas.
-     */
+    //Busca un conductor por ID
     public Conductor buscarConductor(String id) {
         Conductor conductor = conductorDAO.BuscarId(id);
         if (conductor == null) {
-            throw new IllegalArgumentException("No se encontró estudiante con ID: " + id);
+            throw new IllegalArgumentException("No se encontró conductor con ID: " + id);
         }
         return conductor;
     }
@@ -72,9 +75,7 @@ public class ConductorService {
         }
         return lista;
     }
-    /**
-     * Elimina un estudiante por su ID.
-     */
+    //Elimina un conductor por su ID.
     public void eliminarConductor(String id) {
         if (!conductorDAO.existeId(id)) {
             throw new IllegalArgumentException("No existe estudiante con ID: " + id);
@@ -88,8 +89,14 @@ public class ConductorService {
         Conductor conductor = conductorDAO.BuscarId(id);
         
         if (conductor == null){
-            throw new IllegalArgumentException("No existe un conductor con ese ID");
+            throw new IllegalArgumentException("No existe un conductor con ese ID" + id);
         }
+        
+        //Verificar que tenga numero de licencia registrada
+        if (conductor.getNumeroLicencia()==null || conductor.getNumeroLicencia().trim().isEmpty()) {
+            throw new IllegalArgumentException ("El conductor " + conductor.getNombre() + "no tiene numero de licencia registrada");
+        }
+        // Verificar que la categoria sea valida
         if (!categoriasValidas.contains(conductor.getCategoriaLicencia())){
             throw new IllegalArgumentException("El codigo tiene una categoria de licencia invalida");
         }

@@ -28,10 +28,6 @@ public class PasajeroService {
     
     public void validarRegistro (String id, String nombre, LocalDate fechaNacimiento, String tipoIngresado) throws Exception {
         
-        // Inicialmente s verifica que no exista diplicacion de ID
-        if (pasajeroDAO.BuscarId(id) !=null ) {
-             throw new IllegalArgumentException("Ya se ingreso un conductor con este ID");
-        }
         // Validacion de los datos basicos
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID no puede estar vacío");
@@ -43,24 +39,32 @@ public class PasajeroService {
              throw new IllegalArgumentException("La fecha de nacimiento no puede estar vacio");
         }
         
+        // Validar que no exista diplicacion de ID
+        if (pasajeroDAO.BuscarId(id) !=null ) {
+             throw new IllegalArgumentException("Ya se ingreso un pasajero con este ID");
+        }
+        
+        //Determinar la edad del pasajero
         int edad = Period.between(fechaNacimiento, LocalDate.now()).getYears();
 
         Pasajero pasajero;
 
         // Definir si es AdultoMayor, de lo contrario, el usuario define estudiante o pasajero regular
         if (edad >= 60) {
-            pasajero = new PasajeroAdultoMayor(edad, id, nombre, fechaNacimiento);
+            pasajero = new PasajeroAdultoMayor(id, nombre, fechaNacimiento);
             System.out.println("Pasajero registrado como ADULTO MAYOR");
         } else {
             switch (tipoIngresado) {
                 case "Pasajero Estudiante":
-                    pasajero = new PasajeroEstudiante(edad, id, nombre, fechaNacimiento);
+                    pasajero = new PasajeroEstudiante(id, nombre, fechaNacimiento);
                     break;
                 case "Pasajero Regular":
-                    pasajero = new PasajeroRegular(edad, id, nombre, fechaNacimiento);
+                    pasajero = new PasajeroRegular(id, nombre, fechaNacimiento);
                     break;
                 default:
-                    pasajero = null;
+                    throw new IllegalArgumentException(
+                        "Tipo de pasajero inválido: '" + tipoIngresado + "'. "
+                        + "Use 'Pasajero Estudiante' o 'Pasajero Regular'.");
             }
         }
         
@@ -72,7 +76,7 @@ public class PasajeroService {
     public Pasajero buscarPasajero(String id) {
         Pasajero pasajero = pasajeroDAO.BuscarId(id);
         if (pasajero == null) {
-            throw new IllegalArgumentException("No se encontró estudiante con ID: " + id);
+            throw new IllegalArgumentException("No se encontró pasajero con ID: " + id);
         }
         return pasajero;
     }
@@ -89,7 +93,7 @@ public class PasajeroService {
     // Elimina un pasajero por su ID.
     public void eliminarPasajero(String id) {
         if (!pasajeroDAO.existeId(id)) {
-            throw new IllegalArgumentException("No existe estudiante con ID: " + id);
+            throw new IllegalArgumentException("No existe pasajero con ID: " + id);
         }
         pasajeroDAO.eliminarPasajero(id);
         System.out.println("Pasajero eliminado exitosamente.");
