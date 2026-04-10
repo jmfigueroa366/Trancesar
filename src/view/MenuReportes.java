@@ -17,11 +17,9 @@ import java.util.List;
  */
 public class MenuReportes {
     
-    public void menuReportes () throws Exception {
+public void menuReportes(TicketService ts) throws Exception{
     
     BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
-        
-        TicketService ts = new TicketService();
         
         int opc = 0;
         

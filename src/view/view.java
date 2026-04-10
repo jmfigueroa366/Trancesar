@@ -17,14 +17,12 @@ public class view {
         PasajeroDAO pasajeroDAO = new PasajeroDAO();
         VehiculoDAO vehiculoDAO = new VehiculoDAO();
         TicketDAO ticketDAO = new TicketDAO();
-        TicketService ticketService = new TicketService();
-        ReservaService rs = new ReservaService(
-            reservaDAO, pasajeroDAO, vehiculoDAO, ticketDAO, ticketService
-        );
-        
+        TicketService ticketService = new TicketService(ticketDAO, pasajeroDAO, vehiculoDAO);
+
+        ReservaService rs = new ReservaService(reservaDAO, pasajeroDAO, vehiculoDAO, ticketDAO);
         int opcion=0;
         
-        while (opcion!=7) {            
+        while (opcion!=8) {            
             
             
         do {
@@ -35,7 +33,8 @@ public class view {
             System.out.println("4. Menu rutas");
             System.out.println("5. Menu vehiculos");
             System.out.println("6. Menu reservas");
-            System.out.println("7. Salir");
+            System.out.println("7.Menu reportes");
+            System.out.println("8. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             
@@ -47,7 +46,7 @@ public class view {
                     new MenuPasajero().mostrarMenu();
                     break;
                 case 3:
-                    new MenuTicket().mostrarMenu();
+                   new MenuTicket().mostrarMenu(ticketService);
                     break;
                 case 4:
                     new menuRutas().mostrarMenu();
@@ -56,15 +55,18 @@ public class view {
                     new menuVehiculo().mostrarMenu();
                     break;
                 case 6:
-                    new MenuReservas(rs); // ✅ Con parámetro y con break
+                new MenuReservas().mostrarMenu(rs, ticketService);
                     break;
                 case 7:
+                    new MenuReportes().menuReportes(ticketService);
+                    break;
+                case 8:
                     System.out.println("Saliendo...");
                     break;
                 default:
                     System.out.println("Opción inválida");
             }
-        } while (opcion != 7); 
+        } while (opcion != 8); 
       }
     }
     

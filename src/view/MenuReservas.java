@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view;
 
 
@@ -11,13 +7,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import services.TicketService;
 /**
  *
  * @author alvar
  */
 public class MenuReservas {
 
-    public MenuReservas(ReservaService rs) throws IOException {
+    public void mostrarMenu(ReservaService rs, TicketService ticketService) throws IOException {
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         
         int opcion=0;
@@ -144,19 +141,25 @@ public class MenuReservas {
                         break;
 
                 case 5:
-                        System.out.println("\n===== CONVERTIR RESERVA A TICKET =====");
-                        System.out.print("Código de la reserva: ");
-                        String codigoReserva = leer.readLine();
+System.out.println("\n===== CONVERTIR RESERVA A TICKET =====");
+    System.out.print("Código de la reserva: ");
+    String codigoReserva = leer.readLine();
 
-                        System.out.print("Número del ticket: ");
-                        String numeroTicket = leer.readLine();
+    System.out.print("Número del ticket: ");
+    String numeroTicket = leer.readLine();
 
-                        try {
-                            rs.reservaAticket(codigoReserva, numeroTicket);
-                        } catch (Exception e) {
-                            System.out.println("Error: " + e.getMessage());
-                        }
-                        break;
+    System.out.print("Ciudad de origen: ");
+    String origenCiudad = leer.readLine();
+
+    System.out.print("Ciudad de destino: ");
+    String destinoCiudad = leer.readLine();
+
+    try {
+        rs.reservaATicket(codigoReserva, numeroTicket, origenCiudad, destinoCiudad, ticketService);
+    } catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+    }
+    break;
 
                 case 6:
                     System.out.println("Volviendo al menú principal...");

@@ -2,17 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-<<<<<<< HEAD:src/SERVICES/ReservaService.java
-package SERVICES;
-import DAO.PasajeroDAO;
-import DAO.ReservaDAO;
-import DAO.TicketDAO;
-import DAO.VehiculoDAO;
-import MODEL.Pasajero;
-import MODEL.Vehiculo;
-import MODEL.Reserva;
-import MODEL.Ticket;
-=======
+
+
 package services;
 import dao.PasajeroDAO;
 import dao.ReservaDAO;
@@ -25,7 +16,6 @@ import model.Ruta;
 import model.Ticket;
 import services.TicketService;
 import java.io.IOException;
->>>>>>> master:src/services/ReservaService.java
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -50,6 +40,7 @@ public class ReservaService {
         this.vehiculoDAO = vehiculoDAO;
         this.ticketDAO = ticketDAO;
     }
+
     
     public void validarRegistro (String codigo, String idPasajero, String placaVehiculo, String fecha_reserva) 
             throws Exception {

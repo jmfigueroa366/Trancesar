@@ -8,11 +8,9 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class MenuTicket {
-
-    public void mostrarMenu() throws IOException, Exception {
+public void mostrarMenu(TicketService ts) throws IOException, Exception {
 
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
-        TicketService ts = new TicketService();
 
         int opc = 0;
 
